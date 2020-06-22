@@ -7,21 +7,19 @@ import Search from './components/Search';
 import Library from './components/Library';
 import Customers from './components/Customers';
 
-class App extends Component {
-  render () {
-    return (
-      <div>
-        <switch>
-          <Route exact path="/" component={Home} />
-          <Route exact path="/search" component={Search} />
-          <Route exact path="/library" component={Library} />
-          <Route exact path="/customers" component={Customers} />
 
-        </switch>
-      </div>
-    )
-  }
-}
+const App = () => {
+  return (
+    <div>
+      <Switch>
+        <Route exact path="/" component={Home} />
+        <Route exact path="/search" component={Search} />
+        <Route exact path="/library" component={Library} />
+        <Route exact path="/customers" component={Customers} />
+      </Switch>
+    </div>
+  );
+};
 
 export default App;
 

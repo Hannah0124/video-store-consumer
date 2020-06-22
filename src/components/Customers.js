@@ -1,11 +1,9 @@
 import React from 'react'
 
-class Customer extends React.Component {
-  render() {
-    return (
-      <div>This is the Customer page.</div>
-    )
-  }
+const Customers = () => {
+  return (
+    <div>This is the Customers page.</div>
+  )
 }
 
-export default Customer
+export default Customers
