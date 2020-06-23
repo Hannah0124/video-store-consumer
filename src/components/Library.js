@@ -15,8 +15,7 @@ const Library = (props) => {
           overview={movie.overview}
           releaseDate={movie.releaseDate}
           title={movie.title}
-          selectMovieCallback={props.selectMovieCallback}
-          // deleteCardCallback={deleteMovie}
+          addMovieCallback={props.addMovieCallback}
         />
       </section>
     );
