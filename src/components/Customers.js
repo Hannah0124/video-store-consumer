@@ -32,10 +32,10 @@ const Customers = (props) => {
 
       })
 
-      .catch((error) => {
-        // console.log("error: ", error.message)
-        setErrorMessage(error.message);
-      });
+    .catch((error) => {
+      // console.log("error: ", error.message)
+      setErrorMessage(error.message);
+    });
   }, []);
 
   const customerComponents = customers.map((customer, i) => {
@@ -55,7 +55,7 @@ const Customers = (props) => {
           postalCode={customer.postal_code}
           registeredAt={customer.registered_at}
           state={customer.state}
-          onClickCallback={props.onClickCallback}
+          selectCustomerCallback={props.selectCustomerCallback}
         />
       </section>
     );

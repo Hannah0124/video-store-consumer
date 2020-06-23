@@ -17,8 +17,7 @@ const App = (props) => {
   const[movies, setMovies] = useState([]);
   const[movieResults, setMovieResults] = useState([]);
   const[selectedMovies, setSelectedMovies] = useState([]);
-  const[selectedCustomer, setSelectedCustomer] = useState();
-  const[selectedCustomerName, setSelectedCustomerName] = useState();
+  const[selectedCustomer, setSelectedCustomer] = useState({});
   const[errorMessage, setErrorMessage] = useState(null);
 
   // "http://localhost:3000/movies/Psycho";
@@ -50,10 +49,9 @@ const App = (props) => {
       });
   }, [movieResults]);
 
-  const onClickCallback = (clickedCustomer) => {
+  const selectCustomerCallback = (clickedCustomer) => {
     const newCustomer = clickedCustomer
-    setSelectedCustomer(newCustomer);  
-    setSelectedCustomerName(newCustomer.name);  
+    setSelectedCustomer(newCustomer);      
   }
 
   return (
@@ -80,7 +78,7 @@ const App = (props) => {
         </ul>
       </nav>
 
-      <h2>Selected Customer: {selectedCustomerName}</h2>
+      <h2>Selected Customer: {selectedCustomer.name}</h2>
 
       <Switch>
         <Route exact path="/">
@@ -100,7 +98,7 @@ const App = (props) => {
         <Route exact path="/customers">
           <Customers 
             baseUrl={BASE_URL} 
-            onClickCallback={onClickCallback}
+            selectCustomerCallback={selectCustomerCallback}
           />
         </Route>
       </Switch>

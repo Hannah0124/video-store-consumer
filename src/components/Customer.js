@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 const Customer = (props) => {
   const onSelectClick = () => {    
-    props.onClickCallback(props);    
+    props.selectCustomerCallback(props);    
   };
   
   return (
