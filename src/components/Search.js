@@ -2,15 +2,13 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 
-import MovieGrid from './MovieGrid';
+import Movie from './Movie';
 
 const Search = (props) => {
   const BASE_URL = "http://localhost:3000/";
   
   const [query, setQuery] = useState({});
   const [movies, setMovies] = useState([]);
-
-  // let movieComponents = [];
     
   const onSearch = query => {    
     axios.get(BASE_URL + "movies?query=" + query)
@@ -19,7 +17,19 @@ const Search = (props) => {
           console.log("no movies found");
         } else {
           let moviesCopy = response.data.map(movie => {
-            return movie;
+            return (
+              <section key={movie.external_id}>
+                <Movie 
+                  id={movie.external_id}
+                  imageUrl={movie.image_url}
+                  overview={movie.overview}
+                  releaseDate={movie.release_date}
+                  title={movie.title}
+                  buttonText={"Add movie"}
+                  movieCallback={props.addMovieCallback}
+                />
+              </section>
+            );
           });
           setMovies(moviesCopy);
         }
@@ -29,7 +39,7 @@ const Search = (props) => {
         console.log("failed search: " + error);
       })    
     }
-  
+    
   const onInputChange = event => {
     const queryCopy = query;
     queryCopy[event.target.name] = event.target.value;
@@ -68,9 +78,7 @@ const Search = (props) => {
           <input type="submit" value="Search" className="" onSubmit={onSubmit}/>
         </div>
       </form>
-      <MovieGrid
-        moviesList={movies}
-      />
+      <div className="movie">{movies}</div>
     </div>
   )}
 

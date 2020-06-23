@@ -15,7 +15,8 @@ const Library = (props) => {
           overview={movie.overview}
           releaseDate={movie.releaseDate}
           title={movie.title}
-          selectMovieCallback={props.selectMovieCallback}
+          buttonText={"Select movie"}
+          movieCallback={props.selectMovieCallback}
           // deleteCardCallback={deleteMovie}
         />
       </section>

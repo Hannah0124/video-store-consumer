@@ -94,8 +94,6 @@ const App = (props) => {
         }
       // }, [customers])
     }
-
-    
     
   const onFormSubmit = (event) => {
     event.preventDefault();
@@ -109,14 +107,11 @@ const App = (props) => {
     // });
   };
 
-  
-    
-
   // Find - reference
   // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find
-  const selectMovie = (id) => {
+  const selectMovie = (movieInfo) => {
     const currentMovie = movies.find((movie) => {
-      return movie.id === id
+      return movie.id === movieInfo.id
     });
 
     console.log('currentMovie ', currentMovie);
@@ -124,6 +119,34 @@ const App = (props) => {
     setSelectedMovie(currentMovie);
     makeRental(currentMovie, selectedCustomer);
     // return selectedMovie;
+  };
+
+  const addMovie = (movieInfo) => {
+    console.log(movieInfo);
+    // axios.post(BASE_URL + "movies?title=" + 
+    //   selectedMovie.title + 
+    //   "&" + selectedCustomer.id + "&due_date=" + dueDate)
+    //     .then((response) => {
+    //       setRentalInfo(newRental);
+    //       // setCustomers
+
+    //       console.log("response: ", response.data)
+    //       console.log('newRental ', newRental);    
+    //     })
+    //     .catch((error) => {
+    //       // setErrorMessage("error: " + error.cause);
+    //       console.log("failed to save rental: " + error);
+    //     })    
+    //   }
+  // const currentMovie = movies.find((movie) => {
+    //   return movie.id === id
+    // });
+
+    // console.log('currentMovie ', currentMovie);
+
+    // setSelectedMovie(currentMovie);
+    // makeRental(currentMovie, selectedCustomer);
+    // // return selectedMovie;
   };
 
   return (
@@ -164,8 +187,6 @@ const App = (props) => {
             <button className="">Remove Movie</button>
           </div>
 
-          <button></button>
-          {/* <button onClick={makeRental}>Make Rental</button> */}
           <input type="submit" value="Make Rental" className="" onSubmit={onFormSubmit}/>   
 
         </form>
@@ -180,6 +201,7 @@ const App = (props) => {
         <Route path="/search">
           <Search 
             movies={movies}
+            addMovieCallback={addMovie}
           />
         </Route>
         <Route exact path="/library">

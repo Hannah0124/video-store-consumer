@@ -6,7 +6,7 @@ const Movie = (props) => {
 
   const onSelectMovie = (event) => {
     // console.log("event: ", event.target.value);
-    return props.selectMovieCallback(props.id);
+    return props.movieCallback({id: props.id, title: props.title, overview: props.overview, imageURL: props.imageUrl, releaseDate: props.releaseDate});
   };
 
 
@@ -17,7 +17,7 @@ const Movie = (props) => {
       <p>{props.overview}</p>
       <p>{props.releaseDate}</p>
 
-      <button onClick={onSelectMovie}>Select Movie</button>
+      <button onClick={onSelectMovie}>{props.buttonText}</button>
     </div>
   )
 }
