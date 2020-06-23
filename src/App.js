@@ -62,9 +62,9 @@ const App = (props) => {
     setSelectedCustomer(newCustomer);      
   }
 
-   // Date - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date
+  // Date - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date
   // Add date - https://stackoverflow.com/questions/3818193/how-to-add-number-of-days-to-todays-date
-  const rental = (movieInfo) => {
+  const makeRental = (movieInfo, customerInfo) => {
     const checkoutDate = new Date();
 
     const dueDate = new Date(new Date().getTime() + (7 * 24 * 3600 * 1000));
@@ -74,7 +74,7 @@ const App = (props) => {
     newRental.checkoutDate = checkoutDate; 
     newRental.dueDate = dueDate; 
     newRental.movie = movieInfo;
-    // customerId: null,
+    newRental.customer = customerInfo;
     setRentalInfo(newRental);
 
     console.log('newRental ', newRental);
@@ -91,7 +91,7 @@ const App = (props) => {
     console.log('currentMovie ', currentMovie);
 
     setSelectedMovie(currentMovie);
-    rental(currentMovie);
+    makeRental(currentMovie, selectedCustomer);
     // return selectedMovie;
   };
 
@@ -119,7 +119,28 @@ const App = (props) => {
         </ul>
       </nav>
 
-      <h2>Selected Customer: {selectedCustomer.name}</h2>
+      <div>
+        <form className="">
+        {/* <header className="">Search the Database</header> */}
+        
+          <div>
+            <h2>Selected Customer: {selectedCustomer.name}</h2>
+            <button className="">Remove Customer</button>
+          </div>
+
+          <div>
+            <h2>Selected Movie: {selectedMovie.title}</h2>
+            <button className="">Remove Movie</button>
+          </div>
+
+          <button></button>
+          <button onClick={makeRental}>Make Rental</button>
+          
+
+        </form>
+      </div>
+
+      
 
       <Switch>
         <Route exact path="/">
