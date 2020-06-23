@@ -50,7 +50,6 @@ const App = (props) => {
       });
   }, [movieResults]);
 
-
   // useEffect(() => {
   //   axios.get("http://localhost:3000/movies/Psycho")
   //   .then((response) => {

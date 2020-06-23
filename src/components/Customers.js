@@ -7,6 +7,8 @@ import Customer from './Customer';
 const Customers = (props) => {
 
   const[customers, setCustomers] = useState([]);
+  const[selectedCustomer, setSelectedCustomer] = useState();
+  const[selectedCustomerName, setSelectedCustomerName] = useState();
   const[errorMessage, setErrorMessage] = useState(null); 
 
   useEffect(() => {
@@ -14,11 +16,7 @@ const Customers = (props) => {
     
     .then((response) => {
       const apiData = response.data;
-      console.log("customers:", apiData);
-
       const customerObjects = apiData.map((customer, i) => {
-        console.log("customer: ", customer);
-
         return {
           id: customer.id,
           name: customer.name,
@@ -42,6 +40,12 @@ const Customers = (props) => {
       });
   }, []);
 
+  const onClickCallback = (clickedCustomer) => {
+    const newCustomer = clickedCustomer
+    setSelectedCustomer(newCustomer);  
+    setSelectedCustomerName(newCustomer.name);  
+  }
+
 
   const customerComponents = customers.map((customer, i) => {
     return (
@@ -60,6 +64,7 @@ const Customers = (props) => {
           postalCode={customer.postal_code}
           registeredAt={customer.registered_at}
           state={customer.state}
+          onClickCallback={onClickCallback}
         />
       </section>
     );
@@ -72,6 +77,7 @@ const Customers = (props) => {
     // selection will then be visible across the app - use a state to store this info?
     <div>
       <h1>Customers</h1>
+      <h2>Selected Customer: {selectedCustomerName}</h2>
       <div className="customer">{customerComponents}</div>
     </div>
   );
