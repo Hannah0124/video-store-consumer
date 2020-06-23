@@ -17,7 +17,7 @@ const Library = (props) => {
           title={movie.title}
           buttonText={"Select movie"}
           movieCallback={props.selectMovieCallback}
-          // deleteCardCallback={deleteMovie}
+          // addMovieCallback={props.addMovieCallback}
         />
       </section>
     );
