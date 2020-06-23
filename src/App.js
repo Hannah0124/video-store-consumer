@@ -123,30 +123,19 @@ const App = (props) => {
 
   const addMovie = (movieInfo) => {
     console.log(movieInfo);
-    // axios.post(BASE_URL + "movies?title=" + 
-    //   selectedMovie.title + 
-    //   "&" + selectedCustomer.id + "&due_date=" + dueDate)
-    //     .then((response) => {
-    //       setRentalInfo(newRental);
-    //       // setCustomers
-
-    //       console.log("response: ", response.data)
-    //       console.log('newRental ', newRental);    
-    //     })
-    //     .catch((error) => {
-    //       // setErrorMessage("error: " + error.cause);
-    //       console.log("failed to save rental: " + error);
-    //     })    
-    //   }
-  // const currentMovie = movies.find((movie) => {
-    //   return movie.id === id
-    // });
-
-    // console.log('currentMovie ', currentMovie);
-
-    // setSelectedMovie(currentMovie);
-    // makeRental(currentMovie, selectedCustomer);
-    // // return selectedMovie;
+    axios.post(BASE_URL + "movies?" + 
+      "title=" + movieInfo.title + 
+      "&overview=" + movieInfo.overview + 
+      "&release_date=" + movieInfo.releaseDate + 
+      "&image_url=" + movieInfo.imageURL + 
+      "&external_id=" + movieInfo.id
+      ).then((response) => {
+        console.log("response: ", response.data)
+      })
+      .catch((error) => {
+        // setErrorMessage("error: " + error.cause);
+        console.log("failed to save rental: " + error);
+      })  
   };
 
   return (
