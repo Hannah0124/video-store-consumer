@@ -11,6 +11,9 @@ import Customers from './components/Customers';
 const App = () => {
   return (
     <div>
+      {/* navigation for home, movie search, movie library, customer list */}
+      {/* movie and customer selection will be visible across each page as you navigate the app */}
+      {/* if customer & movie are selected, can check out selected movie for the selected customer (checkout is between ONE movie and ONE customer) */}
       <Switch>
         <Route exact path="/" component={Home} />
         <Route exact path="/search" component={Search} />
