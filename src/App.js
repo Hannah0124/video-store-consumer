@@ -16,8 +16,16 @@ const BASE_URL = "http://localhost:3000/";
 const App = (props) => {
   const[movies, setMovies] = useState([]);
   const[movieResults, setMovieResults] = useState([]);
-  const [selectedMovies, setSelectedMovies] = useState([]);
+  // const [selectedMovies, setSelectedMovies] = useState([]);
+  const [selectedMovie, setSelectedMovie] = useState({});
   const[errorMessage, setErrorMessage] = useState(null);
+  const[rentalInfo, setRentalInfo] = useState({
+    customer: null,
+    movie: null,
+    checkoutDate: null,
+    dueDate: null,
+    returned: false
+  });
 
   // "http://localhost:3000/movies/Psycho";
 
@@ -51,27 +59,39 @@ const App = (props) => {
   }, [movieResults]);
 
 
-  // useEffect(() => {
-  //   axios.get("http://localhost:3000/movies/Psycho")
-  //   .then((response) => {
-  //     // const apiData = response.data;
+   // Date - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date
+  // Add date - https://stackoverflow.com/questions/3818193/how-to-add-number-of-days-to-todays-date
+  const rental = (movieInfo) => {
+    const checkoutDate = new Date();
 
-  //     console.log("hey", response)
+    const dueDate = new Date(new Date().getTime() + (7 * 24 * 3600 * 1000));
 
-  //     // const cardObjects = apiData.map((cardWrapper, i) => {
-  //     //   return {
-  //     //     id: cardWrapper.card.id,
-  //     //     text: cardWrapper.card.text,
-  //     //     emoji: cardWrapper.card.emoji
-  //     //   }
-  //     // });
-  //     // setCards(cardObjects);
-  //     })
-  //     .catch((error) => {
-  //       console.log("error: ", error.message)
-  //       // setErrorMessage(error.message);
-  //     });
-  // }, []);
+    const newRental = {...rentalInfo}
+
+    newRental.checkoutDate = checkoutDate; 
+    newRental.dueDate = dueDate; 
+    newRental.movie = movieInfo;
+    // customerId: null,
+    setRentalInfo(newRental);
+
+    console.log('newRental ', newRental);
+  };
+
+
+  // Find - reference
+  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find
+  const selectMovie = (id) => {
+    const currentMovie = movies.find((movie) => {
+      return movie.id === id
+    });
+
+    console.log('currentMovie ', currentMovie);
+
+    setSelectedMovie(currentMovie);
+    rental(currentMovie);
+    // return selectedMovie;
+  };
+
 
   return (
     <Router>
@@ -110,6 +130,8 @@ const App = (props) => {
           <Library 
             // baseUrl={BASE_URL} 
             movies={movies}
+            selectMovieCallback={selectMovie}
+            // selectedMovie={selectedMovie}
           />
         </Route>
         <Route exact path="/customers">

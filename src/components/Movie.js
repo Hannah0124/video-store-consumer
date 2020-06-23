@@ -1,8 +1,15 @@
 import React from 'react'
 import PropTypes from 'prop-types';
 
-
+// selectMovieCallback={props.selectMovieCallback}
 const Movie = (props) => {
+
+  const onSelectMovie = (event) => {
+    // console.log("event: ", event.target.value);
+    return props.selectMovieCallback(props.id);
+  };
+
+
   return (
     <div>
       <img src={props.imageUrl} alt={props.title} />
@@ -10,7 +17,7 @@ const Movie = (props) => {
       <p>{props.overview}</p>
       <p>{props.releaseDate}</p>
 
-      <button>Select Movie</button>
+      <button onClick={onSelectMovie}>Select Movie</button>
     </div>
   )
 }
