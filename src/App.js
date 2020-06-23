@@ -130,11 +130,19 @@ const App = (props) => {
       "&image_url=" + movieInfo.imageURL + 
       "&external_id=" + movieInfo.id
       ).then((response) => {
-        console.log("response: ", response.data)
+        let moviesCopy = [...movies];        
+        moviesCopy.push({
+          id: response.data.id,
+          imageUrl: response.data.image_url,
+          overview: response.data.overview,
+          releaseDate: response.data.release_date,
+          title: response.data.title
+        });
+
+        setMovies(moviesCopy);
       })
       .catch((error) => {
-        // setErrorMessage("error: " + error.cause);
-        console.log("failed to save rental: " + error);
+        setErrorMessage("Failed to add movie: " + error.cause);
       })  
   };
 
