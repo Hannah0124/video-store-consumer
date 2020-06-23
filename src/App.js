@@ -18,7 +18,15 @@ const App = (props) => {
   const[movieResults, setMovieResults] = useState([]);
   const[selectedMovies, setSelectedMovies] = useState([]);
   const[selectedCustomer, setSelectedCustomer] = useState({});
+  const [selectedMovie, setSelectedMovie] = useState({});
   const[errorMessage, setErrorMessage] = useState(null);
+  const[rentalInfo, setRentalInfo] = useState({
+    customer: null,
+    movie: null,
+    checkoutDate: null,
+    dueDate: null,
+    returned: false
+  });
 
   // "http://localhost:3000/movies/Psycho";
 
@@ -53,6 +61,39 @@ const App = (props) => {
     const newCustomer = clickedCustomer
     setSelectedCustomer(newCustomer);      
   }
+
+   // Date - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date
+  // Add date - https://stackoverflow.com/questions/3818193/how-to-add-number-of-days-to-todays-date
+  const rental = (movieInfo) => {
+    const checkoutDate = new Date();
+
+    const dueDate = new Date(new Date().getTime() + (7 * 24 * 3600 * 1000));
+
+    const newRental = {...rentalInfo}
+
+    newRental.checkoutDate = checkoutDate; 
+    newRental.dueDate = dueDate; 
+    newRental.movie = movieInfo;
+    // customerId: null,
+    setRentalInfo(newRental);
+
+    console.log('newRental ', newRental);
+  };
+
+
+  // Find - reference
+  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find
+  const selectMovie = (id) => {
+    const currentMovie = movies.find((movie) => {
+      return movie.id === id
+    });
+
+    console.log('currentMovie ', currentMovie);
+
+    setSelectedMovie(currentMovie);
+    rental(currentMovie);
+    // return selectedMovie;
+  };
 
   return (
     <Router>
@@ -93,6 +134,8 @@ const App = (props) => {
           <Library 
             // baseUrl={BASE_URL} 
             movies={movies}
+            selectMovieCallback={selectMovie}
+            // selectedMovie={selectedMovie}
           />
         </Route>
         <Route exact path="/customers">
