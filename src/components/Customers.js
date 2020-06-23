@@ -20,11 +20,12 @@ const Customers = (props) => {
           name: customer.name,
           accountCredit: customer.account_credit,
           address: customer.address,
+          city: customer.city,
+          state: customer.state,
+          postalCode: customer.postal_code,
           moviesCheckedOutCount: customer.movies_checked_out_count,
           phone: customer.phone,
-          postalCode: customer.postal_code,
           registeredAt: customer.registered_at,
-          state: customer.state
         }
       });
 
@@ -33,7 +34,6 @@ const Customers = (props) => {
       })
 
     .catch((error) => {
-      // console.log("error: ", error.message)
       setErrorMessage(error.message);
     });
   }, []);
@@ -49,12 +49,14 @@ const Customers = (props) => {
         <Customer 
           id={customer.id}
           name={customer.name}
-          accountCredit={customer.account_credit}
-          moviesCheckedOutCount={customer.movies_checked_out_count}
+          accountCredit={customer.accountCredit}
+          moviesCheckedOutCount={customer.moviesCheckedOutCount}
           phone={customer.phone}
-          postalCode={customer.postal_code}
-          registeredAt={customer.registered_at}
+          address={customer.address}
+          postalCode={customer.postalCode}
+          registeredAt={customer.registeredAt}
           state={customer.state}
+          city={customer.city}
           selectCustomerCallback={props.selectCustomerCallback}
         />
       </section>
@@ -62,10 +64,6 @@ const Customers = (props) => {
   });
 
   return (
-    // can see a list of all customers - make a call to the internal video store API?
-
-    // can select a customer
-    // selection will then be visible across the app - use a state to store this info?
     <div>
       <h1>Customers</h1>
       <div className="customer">{customerComponents}</div>

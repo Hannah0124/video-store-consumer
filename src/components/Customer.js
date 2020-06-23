@@ -14,7 +14,7 @@ const Customer = (props) => {
 
       <div>
         <p>{props.address}</p>
-        <p>{props.state}, {props.postalCode}</p>
+        <p>{props.city}, {props.state} {props.postalCode}</p>
         <p>{props.phone}</p>
         <p><strong>Movies Checked Out: </strong>{props.moviesCheckedOutCount}</p>
       </div>
