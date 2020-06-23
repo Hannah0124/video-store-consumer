@@ -8,40 +8,50 @@ const Customers = (props) => {
 
   const[customers, setCustomers] = useState([]);
   const[errorMessage, setErrorMessage] = useState(null); 
+  const doggos = [];
+  
+  const getDoggo = () => {
+    for (let i = 0; i < customers.length; i++) {
+      axios.get('https://dog.ceo/api/breeds/image/random')
+      .then(response => {
+        doggos.push(response.message);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+    };  
+  }  
 
   useEffect(() => {
     axios.get(props.baseUrl + "customers/")
     
     .then((response) => {
+      getDoggo();
       const apiData = response.data;
-      console.log("customers:", apiData);
-
       const customerObjects = apiData.map((customer, i) => {
-        console.log("customer: ", customer);
-
         return {
           id: customer.id,
           name: customer.name,
           accountCredit: customer.account_credit,
           address: customer.address,
+          city: customer.city,
+          state: customer.state,
+          postalCode: customer.postal_code,
           moviesCheckedOutCount: customer.movies_checked_out_count,
           phone: customer.phone,
-          postalCode: customer.postal_code,
           registeredAt: customer.registered_at,
-          state: customer.state
+          // image: doggos[i]
         }
       });
 
       setCustomers(customerObjects);
-
+      
       })
 
-      .catch((error) => {
-        // console.log("error: ", error.message)
-        setErrorMessage(error.message);
-      });
+    .catch((error) => {
+      setErrorMessage(error.message);
+    });
   }, []);
-
 
   const customerComponents = customers.map((customer, i) => {
     return (
@@ -54,22 +64,22 @@ const Customers = (props) => {
         <Customer 
           id={customer.id}
           name={customer.name}
-          accountCredit={customer.account_credit}
-          moviesCheckedOutCount={customer.movies_checked_out_count}
+          accountCredit={customer.accountCredit}
+          moviesCheckedOutCount={customer.moviesCheckedOutCount}
           phone={customer.phone}
-          postalCode={customer.postal_code}
-          registeredAt={customer.registered_at}
+          address={customer.address}
+          postalCode={customer.postalCode}
+          registeredAt={customer.registeredAt}
           state={customer.state}
+          city={customer.city}
+          // image={customer.image}
+          selectCustomerCallback={props.selectCustomerCallback}
         />
       </section>
     );
   });
 
   return (
-    // can see a list of all customers - make a call to the internal video store API?
-
-    // can select a customer
-    // selection will then be visible across the app - use a state to store this info?
     <div>
       <h1>Customers</h1>
       <div className="customer">{customerComponents}</div>

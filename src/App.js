@@ -16,7 +16,8 @@ const BASE_URL = "http://localhost:3000/";
 const App = (props) => {
   const[movies, setMovies] = useState([]);
   const[movieResults, setMovieResults] = useState([]);
-  // const [selectedMovies, setSelectedMovies] = useState([]);
+  const[selectedMovies, setSelectedMovies] = useState([]);
+  const[selectedCustomer, setSelectedCustomer] = useState({});
   const [selectedMovie, setSelectedMovie] = useState({});
   const[errorMessage, setErrorMessage] = useState(null);
   const[rentalInfo, setRentalInfo] = useState({
@@ -28,8 +29,6 @@ const App = (props) => {
   });
 
   // "http://localhost:3000/movies/Psycho";
-
-
 
   useEffect(() => {
     axios.get(BASE_URL + "movies/")
@@ -58,6 +57,10 @@ const App = (props) => {
       });
   }, [movieResults]);
 
+  const selectCustomerCallback = (clickedCustomer) => {
+    const newCustomer = clickedCustomer
+    setSelectedCustomer(newCustomer);      
+  }
 
    // Date - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date
   // Add date - https://stackoverflow.com/questions/3818193/how-to-add-number-of-days-to-todays-date
@@ -92,7 +95,6 @@ const App = (props) => {
     // return selectedMovie;
   };
 
-
   return (
     <Router>
       {errorMessage &&
@@ -117,6 +119,8 @@ const App = (props) => {
         </ul>
       </nav>
 
+      <h2>Selected Customer: {selectedCustomer.name}</h2>
+
       <Switch>
         <Route exact path="/">
           <Home/>
@@ -137,6 +141,7 @@ const App = (props) => {
         <Route exact path="/customers">
           <Customers 
             baseUrl={BASE_URL} 
+            selectCustomerCallback={selectCustomerCallback}
           />
         </Route>
       </Switch>

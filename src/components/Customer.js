@@ -3,6 +3,10 @@ import PropTypes from 'prop-types';
 
 
 const Customer = (props) => {
+  const onSelectClick = () => {    
+    props.selectCustomerCallback(props);    
+  };
+  
   return (
     <div className={props.id}>
       <img src="https://placedog.net/300/300?random" alt="dog" />
@@ -10,12 +14,14 @@ const Customer = (props) => {
 
       <div>
         <p>{props.address}</p>
-        <p>{props.state}, {props.postalCode}</p>
+        <p>{props.city}, {props.state} {props.postalCode}</p>
         <p>{props.phone}</p>
         <p><strong>Movies Checked Out: </strong>{props.moviesCheckedOutCount}</p>
       </div>
 
-      <button>Select Customer</button>
+      <button className="" onClick={onSelectClick}>
+        Select customer
+      </button>
     </div>
   );
 };
