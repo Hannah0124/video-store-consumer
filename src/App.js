@@ -16,12 +16,12 @@ const BASE_URL = "http://localhost:3000/";
 const App = (props) => {
   const[movies, setMovies] = useState([]);
   const[movieResults, setMovieResults] = useState([]);
-  const [selectedMovies, setSelectedMovies] = useState([]);
+  const[selectedMovies, setSelectedMovies] = useState([]);
+  const[selectedCustomer, setSelectedCustomer] = useState();
+  const[selectedCustomerName, setSelectedCustomerName] = useState();
   const[errorMessage, setErrorMessage] = useState(null);
 
   // "http://localhost:3000/movies/Psycho";
-
-
 
   useEffect(() => {
     axios.get(BASE_URL + "movies/")
@@ -50,27 +50,11 @@ const App = (props) => {
       });
   }, [movieResults]);
 
-  // useEffect(() => {
-  //   axios.get("http://localhost:3000/movies/Psycho")
-  //   .then((response) => {
-  //     // const apiData = response.data;
-
-  //     console.log("hey", response)
-
-  //     // const cardObjects = apiData.map((cardWrapper, i) => {
-  //     //   return {
-  //     //     id: cardWrapper.card.id,
-  //     //     text: cardWrapper.card.text,
-  //     //     emoji: cardWrapper.card.emoji
-  //     //   }
-  //     // });
-  //     // setCards(cardObjects);
-  //     })
-  //     .catch((error) => {
-  //       console.log("error: ", error.message)
-  //       // setErrorMessage(error.message);
-  //     });
-  // }, []);
+  const onClickCallback = (clickedCustomer) => {
+    const newCustomer = clickedCustomer
+    setSelectedCustomer(newCustomer);  
+    setSelectedCustomerName(newCustomer.name);  
+  }
 
   return (
     <Router>
@@ -96,6 +80,8 @@ const App = (props) => {
         </ul>
       </nav>
 
+      <h2>Selected Customer: {selectedCustomerName}</h2>
+
       <Switch>
         <Route exact path="/">
           <Home/>
@@ -114,6 +100,7 @@ const App = (props) => {
         <Route exact path="/customers">
           <Customers 
             baseUrl={BASE_URL} 
+            onClickCallback={onClickCallback}
           />
         </Route>
       </Switch>
