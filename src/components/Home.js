@@ -9,3 +9,11 @@ class Home extends React.Component {
 }
 
 export default Home
+
+const Home = () => {
+  return (
+    <div>This is the Home page.</div>
+  );
+};
+
+export default Home;
