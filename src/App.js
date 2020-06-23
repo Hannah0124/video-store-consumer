@@ -18,7 +18,7 @@ const App = (props) => {
   const[movieResults, setMovieResults] = useState([]);
   const[selectedMovies, setSelectedMovies] = useState([]);
   const[selectedCustomer, setSelectedCustomer] = useState({});
-  const [selectedMovie, setSelectedMovie] = useState({});
+  const[selectedMovie, setSelectedMovie] = useState({});
   const[errorMessage, setErrorMessage] = useState(null);
   const[rentalInfo, setRentalInfo] = useState({
     customer: null,
@@ -55,7 +55,7 @@ const App = (props) => {
         // console.log("error: ", error.message)
         setErrorMessage(error.message);
       });
-  }, [movieResults]);
+    }, [movieResults]);
 
   const selectCustomerCallback = (clickedCustomer) => {
     const newCustomer = clickedCustomer
@@ -64,7 +64,8 @@ const App = (props) => {
 
   // Date - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date
   // Add date - https://stackoverflow.com/questions/3818193/how-to-add-number-of-days-to-todays-date
-  const makeRental = (movieInfo, customerInfo) => {
+
+  const makeRental = () => {  // movieInfo, customerInfo
     const checkoutDate = new Date();
 
     const dueDate = new Date(new Date().getTime() + (7 * 24 * 3600 * 1000));
@@ -73,13 +74,43 @@ const App = (props) => {
 
     newRental.checkoutDate = checkoutDate; 
     newRental.dueDate = dueDate; 
-    newRental.movie = movieInfo;
-    newRental.customer = customerInfo;
-    setRentalInfo(newRental);
+    newRental.movie = selectedMovie;
+    newRental.customer = selectedCustomer;
 
-    console.log('newRental ', newRental);
+    // useEffect(() => { 
+      if (selectedMovie.title && selectedCustomer.id) {
+        axios.post(BASE_URL + "rentals/" + selectedMovie.title + "/check-out?customer_id=" + selectedCustomer.id + "&due_date=" + dueDate)
+          .then((response) => {
+            setRentalInfo(newRental);
+            // setCustomers
+  
+            console.log("response: ", response.data)
+            console.log('newRental ', newRental);    
+          })
+          .catch((error) => {
+            // setErrorMessage("error: " + error.cause);
+            console.log("failed to save rental: " + error);
+          })    
+        }
+      // }, [customers])
+    }
+
+    
+    
+  const onFormSubmit = (event) => {
+    event.preventDefault();
+
+    // props.findMoviesCallback(query);
+    // props.searchMoviesCallback(query);
+    makeRental();
+
+    // setQuery({
+    //   text: ""
+    // });
   };
 
+  
+    
 
   // Find - reference
   // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find
@@ -120,7 +151,7 @@ const App = (props) => {
       </nav>
 
       <div>
-        <form className="">
+        <form className="" onSubmit={onFormSubmit}>
         {/* <header className="">Search the Database</header> */}
         
           <div>
@@ -134,8 +165,8 @@ const App = (props) => {
           </div>
 
           <button></button>
-          <button onClick={makeRental}>Make Rental</button>
-          
+          {/* <button onClick={makeRental}>Make Rental</button> */}
+          <input type="submit" value="Make Rental" className="" onSubmit={onFormSubmit}/>   
 
         </form>
       </div>
@@ -162,6 +193,7 @@ const App = (props) => {
         <Route exact path="/customers">
           <Customers 
             baseUrl={BASE_URL} 
+            // customers={customers}
             selectCustomerCallback={selectCustomerCallback}
           />
         </Route>

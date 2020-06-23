@@ -10,23 +10,22 @@ const Customers = (props) => {
   const[errorMessage, setErrorMessage] = useState(null); 
   const doggos = [];
   
-  const getDoggo = () => {
-    for (let i = 0; i < customers.length; i++) {
-      axios.get('https://dog.ceo/api/breeds/image/random')
-      .then(response => {
-        doggos.push(response.message);
-      })
-      .catch(error => {
-        console.log(error);
-      });
-    };  
-  }  
+  // const getDoggo = () => {
+  //   for (let i = 0; i < customers.length; i++) {
+  //     axios.get('https://dog.ceo/api/breeds/image/random')
+  //     .then(response => {
+  //       doggos.push(response.message);
+  //     })
+  //     .catch(error => {
+  //       console.log(error);
+  //     });
+  //   };  
+  // }  
 
   useEffect(() => {
     axios.get(props.baseUrl + "customers/")
-    
     .then((response) => {
-      getDoggo();
+      // getDoggo();
       const apiData = response.data;
       const customerObjects = apiData.map((customer, i) => {
         return {
@@ -51,7 +50,7 @@ const Customers = (props) => {
     .catch((error) => {
       setErrorMessage(error.message);
     });
-  }, []);
+  }, [customers]);
 
   const customerComponents = customers.map((customer, i) => {
     return (
