@@ -11,37 +11,75 @@ import Search from './components/Search';
 import Library from './components/Library';
 import Customers from './components/Customers';
 
+const BASE_URL = "http://localhost:3000/";
 
-const App = () => {
-  // const[cards, setCards] = useState([]);
-  // const[errorMessage, setErrorMessage] = useState(null);
-  // BASE_URL = "http://localhost:3000/movies/Psycho";
+const App = (props) => {
+  const[movies, setMovies] = useState([]);
+  const[movieResults, setMovieResults] = useState([]);
+  const [selectedMovies, setSelectedMovies] = useState([]);
+  const[errorMessage, setErrorMessage] = useState(null);
+
+  // "http://localhost:3000/movies/Psycho";
+
 
 
   useEffect(() => {
-    axios.get("http://localhost:3000/movies/Psycho")
+    axios.get(BASE_URL + "movies/")
+    
     .then((response) => {
-      // const apiData = response.data;
+      const apiData = response.data;
+      // console.log("library:", apiData);
 
-      console.log("hey", response)
-
-      // const cardObjects = apiData.map((cardWrapper, i) => {
-      //   return {
-      //     id: cardWrapper.card.id,
-      //     text: cardWrapper.card.text,
-      //     emoji: cardWrapper.card.emoji
-      //   }
-      // });
-      // setCards(cardObjects);
-      })
-      .catch((error) => {
-        console.log("error: ", error.message)
-        // setErrorMessage(error.message);
+      const movieObjects = apiData.map((movie, i) => {
+        // console.log("movie: ", movie);
+        return {
+          // externalId: movie.external_id,
+          id: movie.id,
+          imageUrl: movie.image_url,
+          overview: movie.overview,
+          releaseDate: movie.release_date,
+          title: movie.title
+        }
       });
-  }, []);
+      setMovies(movieObjects);
+      })
+
+      .catch((error) => {
+        // console.log("error: ", error.message)
+        setErrorMessage(error.message);
+      });
+  }, [movieResults]);
+
+
+  // useEffect(() => {
+  //   axios.get("http://localhost:3000/movies/Psycho")
+  //   .then((response) => {
+  //     // const apiData = response.data;
+
+  //     console.log("hey", response)
+
+  //     // const cardObjects = apiData.map((cardWrapper, i) => {
+  //     //   return {
+  //     //     id: cardWrapper.card.id,
+  //     //     text: cardWrapper.card.text,
+  //     //     emoji: cardWrapper.card.emoji
+  //     //   }
+  //     // });
+  //     // setCards(cardObjects);
+  //     })
+  //     .catch((error) => {
+  //       console.log("error: ", error.message)
+  //       // setErrorMessage(error.message);
+  //     });
+  // }, []);
 
   return (
     <Router>
+      {errorMessage &&
+      <div className="validation-errors-display__list">
+        <h2>{errorMessage}</h2>
+      </div>}
+
       <nav>
         <ul>
           <li>
@@ -60,14 +98,29 @@ const App = () => {
       </nav>
 
       <Switch>
-        <Route exact path="/"><Home/></Route>
-        <Route exact path="/search"><Search /></Route>
-        <Route exact path="/library"><Library /></Route>
-        <Route exact path="/customers"><Customers /></Route>
+        <Route exact path="/">
+          <Home/>
+        </Route>
+        <Route path="/search">
+          <Search 
+            movies={movies}
+          />
+        </Route>
+        <Route exact path="/library">
+          <Library 
+            // baseUrl={BASE_URL} 
+            movies={movies}
+          />
+        </Route>
+        <Route exact path="/customers">
+          <Customers 
+            baseUrl={BASE_URL} 
+          />
+        </Route>
       </Switch>
     </Router>
-  )
-}
+  );
+};
 
 export default App;
 
