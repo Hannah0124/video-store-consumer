@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
+import { faTimesCircle } from '@fortawesome/free-regular-svg-icons';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import logo from './doge-rentals-logo.png';
+
 
 import { Route, Switch, Link, BrowserRouter as Router } from 'react-router-dom';
 // import { Nav, Navbar, Form, FormControl } from 'react-bootstrap';
@@ -17,8 +21,8 @@ const App = (props) => {
   const[movies, setMovies] = useState([]);
   const[movieResults, setMovieResults] = useState([]);
   const[selectedMovies, setSelectedMovies] = useState([]);
-  const[selectedCustomer, setSelectedCustomer] = useState({});
-  const[selectedMovie, setSelectedMovie] = useState({});
+  const[selectedCustomer, setSelectedCustomer] = useState({name: "N/A"});
+  const[selectedMovie, setSelectedMovie] = useState({title: "N/A"});
   const[errorMessage, setErrorMessage] = useState(null);
   const[rentalInfo, setRentalInfo] = useState({
     customer: null,
@@ -149,48 +153,54 @@ const App = (props) => {
   return (
     <Router>
       {errorMessage &&
-      <div className="validation-errors-display__list">
+      <div className="alert">
         <h2>{errorMessage}</h2>
       </div>}
 
-      <nav className="navbar navbar-expand-lg navbar-light bg-light sticky-top">
-        <Link to="/" className="navbar-brand">Videoge</Link>
-        <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span className="navbar-toggler-icon"></span>
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a href="/" className="navbar-brand">
+          <img src={logo} alt="dog" className="navbar__logo" />
+          Doge Rentals
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
         </button>
-
-        <div className="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul className="navbar-nav mr-auto">
-            <li className="nav-item">
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item active">
               <Link to="/" className="nav-link" href="#">Home</Link>
             </li>
-            <li className="nav-item">
+            <li class="nav-item">
               <Link to="/search" className="nav-link">Search</Link>
             </li>
-            <li className="nav-item">
+            <li class="nav-item">
               <Link to="/library" className="nav-link">Library</Link>
             </li>
-            <li className="nav-item">
+            <li class="nav-item">
               <Link to="/customers" className="nav-link">Customers</Link>
             </li>
           </ul>
-          <div class>
-            <form className="form-inline" onSubmit={onFormSubmit}>
-            {/* <header className="">Search the Database</header> */}
-                <div>
-                <span class="navbar-text">Selected Customer</span>
-                <span>{selectedCustomer.name} <button className="">Remove Customer</button></span></div>
-                <span class="navbar-text">Selected Movie: {selectedMovie.title}</span>
-                <button className="">Remove Movie</button>
-
-              <input type="submit" value="Make Rental" className="" onSubmit={onFormSubmit}/>   
-            </form>
-          </div>
         </div>
+        <form className="navbar-nav" onSubmit={onFormSubmit}>
+        <div className="text-center m-2 selected__item">
+            Selected Customer
+            <div className="selected__text">
+              {selectedCustomer.name} 
+              {/* make this field clickable to remove selection */}
+              {/* { selectedCustomer.name === "N/A" ? "" : <button className="btn btn-danger btn-sm"><FontAwesomeIcon icon={faTimesCircle} /></button>} */}
+            </div> 
+          </div> 
+          <div className="text-center m-2 selected__item">
+            Selected Movie 
+            <div className="selected__text">
+              {selectedMovie.title} 
+              {/* make this field clickable to remove selection */}
+              {/* { selectedMovie.title === "N/A" ? "" : <button className="btn btn-danger btn-sm"><FontAwesomeIcon icon={faTimesCircle} /></button>} */}
+            </div> 
+          </div> 
+          <input type="submit" value="Make Rental" className="mx-auto text-center btn btn-primary btn-sm" onSubmit={onFormSubmit}/>   
+        </form>
       </nav>
-
-
-      
 
       <Switch>
         <Route exact path="/">
