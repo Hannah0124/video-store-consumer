@@ -83,6 +83,9 @@ const App = (props) => {
           .then((response) => {
             setRentalInfo(newRental);
             // setCustomers
+
+            setSelectedCustomer({});
+            setSelectedMovie({});
   
             console.log("response: ", response.data)
             console.log('newRental ', newRental);    
@@ -146,6 +149,16 @@ const App = (props) => {
       })  
   };
 
+  const removeMovie = () => {
+    setSelectedMovie({});
+  };
+
+  const removeCustomer = () => {
+    setSelectedCustomer({});
+  };
+
+
+
   return (
     <Router>
       {errorMessage &&
@@ -175,16 +188,16 @@ const App = (props) => {
         {/* <header className="">Search the Database</header> */}
         
           <div>
-            <h2>Selected Customer: {selectedCustomer.name}</h2>
-            <button className="">Remove Customer</button>
+            <h5>Selected Movie: {selectedMovie.title}</h5>
+            <button className="button-bg" onClick={removeMovie}>Remove Movie</button>
           </div>
 
           <div>
-            <h2>Selected Movie: {selectedMovie.title}</h2>
-            <button className="">Remove Movie</button>
+            <h5>Selected Customer: {selectedCustomer.name}</h5>
+            <button className="button-bg" onClick={removeCustomer}>Remove Customer</button>
           </div>
 
-          <input type="submit" value="Make Rental" className="" onSubmit={onFormSubmit}/>   
+          <input type="submit" value="Make Rental" className="button-bg" onSubmit={onFormSubmit}/>   
 
         </form>
       </div>
