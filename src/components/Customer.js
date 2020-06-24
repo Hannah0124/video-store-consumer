@@ -9,7 +9,7 @@ const Customer = (props) => {
   
   return (
     <div className={props.id}>
-      <img src="https://placedog.net/300/300?random" alt="dog" />
+      <img src={"https://placedog.net/200/200/" + props.id} alt="dog" />
       <h1>{props.name}</h1>
 
       <div>
