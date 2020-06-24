@@ -8,7 +8,7 @@ import Movie from './Movie';
 const Search = (props) => {
   const BASE_URL = "http://localhost:3000/";
   
-  const [query, setQuery] = useState({});
+  const [query, setQuery] = useState({text: ""});
   const [movies, setMovies] = useState([]);
     
   const onSearch = query => {    
@@ -42,9 +42,7 @@ const Search = (props) => {
     }
     
   const onInputChange = event => {
-    const queryCopy = query;
-    queryCopy[event.target.name] = event.target.value;
-    setQuery(queryCopy);
+    setQuery({text: event.target.value});
   }
 
   const onSubmit = event => {
