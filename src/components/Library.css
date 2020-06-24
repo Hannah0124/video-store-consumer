@@ -1,0 +1,15 @@
+.library-container {
+  display: flex;
+  flex-direction: column;
+  /* margin-left: auto;
+  margin-right: auto; */
+  justify-content: center;
+  align-items: center;
+}
+
+.library-title {
+  margin-top: 20px;
+  margin-bottom: 80px;
+  font-family: 'Open Sans Condensed', sans-serif;
+  color: #EF6A4E;
+}

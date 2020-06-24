@@ -87,6 +87,9 @@ const App = (props) => {
           .then((response) => {
             setRentalInfo(newRental);
             // setCustomers
+
+            setSelectedCustomer({});
+            setSelectedMovie({});
   
             console.log("response: ", response.data)
             console.log('newRental ', newRental);    
@@ -149,6 +152,16 @@ const App = (props) => {
         setErrorMessage("Failed to add movie: " + error.cause);
       })  
   };
+
+  const removeMovie = () => {
+    setSelectedMovie({});
+  };
+
+  const removeCustomer = () => {
+    setSelectedCustomer({});
+  };
+
+
 
   return (
     <Router>

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
+import './Library.css';
 
 import Movie from './Movie';
 
@@ -29,8 +30,8 @@ const Library = (props) => {
 
     // can select a movie from the rental library
     // selection will then be visible across the app - use a state to store this info?
-    <div>
-      <h1>Library</h1>
+    <div className="library-container">
+      <h1 className="library-title">Library</h1>
       <div className="movie">{movieComponents}</div>
     </div>
   );

@@ -1,0 +1,24 @@
+
+.movie-container {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 80px;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.movie-info {
+  max-width: 500px;
+  margin-left: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.release-date {
+  color: rgb(126, 122, 122);
+}
+
+.movie-poster {
+  width: 250px;
+}

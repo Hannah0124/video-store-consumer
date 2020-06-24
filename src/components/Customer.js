@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types';
+import './Customer.css';
 
 
 const Customer = (props) => {
@@ -8,19 +9,20 @@ const Customer = (props) => {
   };
   
   return (
-    <div className={props.id}>
+    <div className="customer-container">
       <img src={"https://placedog.net/200/200/" + props.id} alt="dog" className="rounded-circle" />
-      <h1>{props.name}</h1>
+      
 
-      <div>
-        <p>{props.address}</p>
-        <p>{props.city}, {props.state} {props.postalCode}</p>
-        <p>{props.phone}</p>
+      <div className="customer-info">
+        <h4 className="customer-name">{props.name}</h4>
+        <p className="gray-font">{props.address}</p>
+        <p className="gray-font">{props.city}, {props.state} {props.postalCode}</p>
+        <p className="gray-font">{props.phone}</p>
         <p><strong>Movies Checked Out: </strong>{props.moviesCheckedOutCount}</p>
       </div>
 
-      <button className="" onClick={onSelectClick}>
-        Select customer
+      <button className="button-bg" onClick={onSelectClick}>
+        Select Customer
       </button>
     </div>
   );
