@@ -47,6 +47,7 @@
 
 .selected__submit {
   height: 30px;
+}
 
 /* https://stackoverflow.com/questions/3397113/how-to-remove-focus-border-outline-around-text-input-boxes-chrome */
 input:focus, button:focus, button:click {
