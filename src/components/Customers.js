@@ -9,37 +9,10 @@ import './Customers.css';
 
 const Customers = (props) => {
 
-  const[customers, setCustomers] = useState([]);
   const[errorMessage, setErrorMessage] = useState(null); 
 
-  useEffect(() => {
-    axios.get(props.baseUrl + "customers/")
-    .then((response) => {
-      const apiData = response.data;
-      const customerObjects = apiData.map((customer, i) => {
-        return {
-        id: customer.id,
-        name: customer.name,
-        accountCredit: customer.account_credit,
-        address: customer.address,
-        city: customer.city,
-        state: customer.state,
-        postalCode: customer.postal_code,
-        moviesCheckedOutCount: customer.movies_checked_out_count,
-        phone: customer.phone,
-        registeredAt: customer.registered_at,
-      }
-    });
-    
-    setCustomers(customerObjects);
-    })
-
-    .catch((error) => {
-      setErrorMessage(error.message);
-    });
-  }, [customers]);
-
-  const customerComponents = customers.map((customer, i) => {
+  
+  const customerComponents = props.customers.map((customer, i) => {
     return (
       <section key={customer.id} className="customer-components">
         {errorMessage &&
