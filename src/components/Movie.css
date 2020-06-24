@@ -19,6 +19,14 @@
   color: rgb(126, 122, 122);
 }
 
+.active {
+  display: block;
+}
+
+.inactive {
+  display: none;
+}
+
 .movie-poster {
   width: 250px;
 }
