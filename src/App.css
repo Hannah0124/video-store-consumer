@@ -45,6 +45,19 @@
   border-radius: 5px;
 }
 
+.selected__text:hover {
+  background-color: rgb(199, 98, 98);
+  transition: background-color 1s;
+}
+
+.selected__text:hover span {
+  display: none;
+}
+
+.selected__text:hover:before {
+  content: "Deselect?";
+}
+
 .selected__submit {
   height: 30px;
 }

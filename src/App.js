@@ -154,14 +154,12 @@ const App = (props) => {
   };
 
   const removeMovie = () => {
-    setSelectedMovie({});
+    setSelectedMovie({title: "N/A"});
   };
 
   const removeCustomer = () => {
-    setSelectedCustomer({});
+    setSelectedCustomer({name: "N/A"});
   };
-
-
 
   return (
     <Router>
@@ -197,18 +195,14 @@ const App = (props) => {
         <form className="navbar-nav selected__items" onSubmit={onFormSubmit}>
           <div className="text-center m-2 selected__item">
             Selected Customer
-            <div className="selected__text">
-              {selectedCustomer.name} 
-              {/* make this field clickable to remove selection */}
-              {/* { selectedCustomer.name === "N/A" ? "" : <button className="btn btn-danger btn-sm"><FontAwesomeIcon icon={faTimesCircle} /></button>} */}
+            <div className="selected__text" onClick={removeCustomer}>
+              <span>{selectedCustomer.name} </span>
             </div> 
           </div> 
           <div className="text-center m-2 selected__item">
             Selected Movie 
-            <div className="selected__text">
-              {selectedMovie.title} 
-              {/* make this field clickable to remove selection */}
-              {/* { selectedMovie.title === "N/A" ? "" : <button className="btn btn-danger btn-sm"><FontAwesomeIcon icon={faTimesCircle} /></button>} */}
+            <div className="selected__text" onClick={removeMovie}>
+              <span>{selectedMovie.title} </span>
             </div> 
           </div> 
           <input type="submit" value="Rent" className="align-self-center text-center btn btn-primary btn-sm selected__submit" onSubmit={onFormSubmit}/>   
