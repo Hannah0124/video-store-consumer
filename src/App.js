@@ -1,11 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
-import { faTimesCircle } from '@fortawesome/free-regular-svg-icons';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import logo from './doge-rentals-logo.png';
-
-
 import { Route, Switch, Link, BrowserRouter as Router } from 'react-router-dom';
 // import { Nav, Navbar, Form, FormControl } from 'react-bootstrap';
 
@@ -37,25 +33,22 @@ const App = (props) => {
   const addCustomers = () => {
     axios.get(BASE_URL + "customers/")
     .then((response) => {
-      const apiData = response.data;
-      const customerObjects = apiData.map((customer, i) => {
+      const customerObjects = response.data.map((customer, i) => {
         return {
-        id: customer.id,
-        name: customer.name,
-        accountCredit: customer.account_credit,
-        address: customer.address,
-        city: customer.city,
-        state: customer.state,
-        postalCode: customer.postal_code,
-        moviesCheckedOutCount: customer.movies_checked_out_count,
-        phone: customer.phone,
-        registeredAt: customer.registered_at,
-      }
-    });
-    
-    setCustomers(customerObjects);
+          id: customer.id,
+          name: customer.name,
+          accountCredit: customer.account_credit,
+          address: customer.address,
+          city: customer.city,
+          state: customer.state,
+          postalCode: customer.postal_code,
+          moviesCheckedOutCount: customer.movies_checked_out_count,
+          phone: customer.phone,
+          registeredAt: customer.registered_at,
+        }
+      });
+      setCustomers(customerObjects);
     })
-
     .catch((error) => {
       setErrorMessage(error.message);
     });
@@ -82,13 +75,12 @@ const App = (props) => {
     });
   }
 
-  // on initial load add the customers and movies
+  // on initial load, add customers and movies from API
   useEffect(addCustomers, []);
   useEffect(addMovies, []);
 
   // Date - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date
   // Add date - https://stackoverflow.com/questions/3818193/how-to-add-number-of-days-to-todays-date
-
   const makeRental = () => {  // movieInfo, customerInfo
     const checkoutDate = new Date();
 
@@ -123,9 +115,6 @@ const App = (props) => {
     
   const onFormSubmit = (event) => {
     event.preventDefault();
-
-    // props.findMoviesCallback(query);
-    // props.searchMoviesCallback(query);
     makeRental();
   };
 
@@ -137,8 +126,7 @@ const App = (props) => {
     });
 
     setSelectedMovie(currentMovie);
-    makeRental(currentMovie, selectedCustomer);
-    // return selectedMovie;
+    // makeRental(currentMovie, selectedCustomer); do we need this here?
   };
 
   const selectCustomerCallback = (clickedCustomer) => {
@@ -147,7 +135,6 @@ const App = (props) => {
   }
 
   const addMovie = (movieInfo) => {
-    console.log(movieInfo);
     axios.post(BASE_URL + "movies?" + 
       "title=" + movieInfo.title + 
       "&overview=" + movieInfo.overview + 
