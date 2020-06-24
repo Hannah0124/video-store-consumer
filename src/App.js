@@ -189,7 +189,7 @@ const App = (props) => {
         <h2>{errorMessage}</h2>
       </div>}
 
-      <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+      <nav className="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
         <Link href="/" className="navbar-brand">
           <img src={logo} alt="dog" className="navbar__logo" />
           Doge Rentals
