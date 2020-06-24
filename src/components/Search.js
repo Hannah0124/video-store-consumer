@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
+import './Search.css';
 
 import Movie from './Movie';
 
@@ -63,22 +64,24 @@ const Search = (props) => {
   
   return (
     // after making search, can add a movie from results to rental library (local API)
-    <div>
+    <div className="search-container">
       <form className="" onSubmit={onSubmit}>
-      <header className="">Search the Database</header>
-        <div className="">
+      <header className="search-box-title">Search the Database</header>
+        <div className="search-box-container">
           <input
-            className=""
+            className="search-box"
             type="text"
             name="text"
             placeholder="search here"
             value={query.text}
             onChange={onInputChange}
           />
-          <input type="submit" value="Search" className="" onSubmit={onSubmit}/>
+          <input type="submit" value="Search" className="search-btn" onSubmit={onSubmit}/>
         </div>
       </form>
-      <div className="movie">{movies}</div>
+      <div className="movie">
+        {movies}
+      </div>
     </div>
   )}
 
