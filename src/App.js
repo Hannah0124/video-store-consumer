@@ -24,6 +24,7 @@ const App = (props) => {
   const[selectedCustomer, setSelectedCustomer] = useState({name: "N/A"});
   const[selectedMovie, setSelectedMovie] = useState({title: "N/A"});
   const[errorMessage, setErrorMessage] = useState(null);
+  const[flash, setFlash] = useState("");
   const[rentalInfo, setRentalInfo] = useState({
     customer: null,
     movie: null,
@@ -90,6 +91,7 @@ const App = (props) => {
 
             setSelectedCustomer({name: "N/A"});
             setSelectedMovie({title: "N/A"});
+            setFlash(`${selectedMovie.title} has been checked out to ${selectedCustomer.name}!`);
   
             console.log("response: ", response.data)
             console.log('newRental ', newRental);    
@@ -209,6 +211,8 @@ const App = (props) => {
         </form>
       </nav>
 
+      {flash && <p className="flash-message">{flash}</p>}
+      
       <Switch>
         <Route exact path="/">
           <Home/>
