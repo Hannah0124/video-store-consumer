@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types';
+import Button from 'react-bootstrap/Button';
 
 // selectMovieCallback={props.selectMovieCallback}
 const Movie = (props) => {
@@ -17,7 +18,7 @@ const Movie = (props) => {
       <p>{props.overview}</p>
       <p>{props.releaseDate}</p>
 
-      <button onClick={onSelectMovie}>{props.buttonText}</button>
+      <Button className="primary" onClick={onSelectMovie}>{props.buttonText}</Button>
     </div>
   )
 }
