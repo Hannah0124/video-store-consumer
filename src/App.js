@@ -157,7 +157,7 @@ const App = (props) => {
         <h2>{errorMessage}</h2>
       </div>}
 
-      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <a href="/" className="navbar-brand">
           <img src={logo} alt="dog" className="navbar__logo" />
           Doge Rentals
@@ -181,8 +181,8 @@ const App = (props) => {
             </li>
           </ul>
         </div>
-        <form className="navbar-nav" onSubmit={onFormSubmit}>
-        <div className="text-center m-2 selected__item">
+        <form className="navbar-nav selected__items" onSubmit={onFormSubmit}>
+          <div className="text-center m-2 selected__item">
             Selected Customer
             <div className="selected__text">
               {selectedCustomer.name} 
@@ -198,7 +198,7 @@ const App = (props) => {
               {/* { selectedMovie.title === "N/A" ? "" : <button className="btn btn-danger btn-sm"><FontAwesomeIcon icon={faTimesCircle} /></button>} */}
             </div> 
           </div> 
-          <input type="submit" value="Make Rental" className="mx-auto text-center btn btn-primary btn-sm" onSubmit={onFormSubmit}/>   
+          <input type="submit" value="Rent" className="align-self-center text-center btn btn-primary btn-sm selected__submit" onSubmit={onFormSubmit}/>   
         </form>
       </nav>
 

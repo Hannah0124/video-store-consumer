@@ -35,10 +35,16 @@
 
 .selected__item {
   width: 200px;
+  color: white;
 }
 
 .selected__text {
   display: block;
   width: 100%;
-  background-color: white;
+  background-color: rgb(165, 165, 165);
+  border-radius: 5px;
+}
+
+.selected__submit {
+  height: 30px;
 }
