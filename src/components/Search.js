@@ -59,7 +59,7 @@ const Search = (props) => {
     onSearch(query.text);
 
     // clear text fields for next submission
-    setQuery({});
+    setQuery({text: ""});
   }
   
   return (
