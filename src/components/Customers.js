@@ -3,6 +3,9 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 import Customer from './Customer';
 
+import './Customers.css';
+
+
 
 const Customers = (props) => {
 
@@ -38,7 +41,7 @@ const Customers = (props) => {
 
   const customerComponents = customers.map((customer, i) => {
     return (
-      <section key={customer.id}>
+      <section key={customer.id} className="customer-components">
         {errorMessage &&
         <div className="validation-errors-display__list">
           <h2>{errorMessage}</h2>
@@ -62,9 +65,9 @@ const Customers = (props) => {
   });
 
   return (
-    <div>
-      <h1>Customers</h1>
-      <div className="customer">{customerComponents}</div>
+    <div className="customers-container">
+      <h1 className="customers-title">Customers</h1>
+      <div className="customer-components">{customerComponents}</div>
     </div>
   );
 };

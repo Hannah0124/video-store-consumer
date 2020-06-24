@@ -1,0 +1,28 @@
+.customer-container {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 80px;
+  font-family: 'Open Sans', sans-serif;
+  max-width: 200px;
+  margin-right: 80px;
+  margin-left: 80px;
+}
+
+.customer-name {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.customer-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  line-height: 15px;
+}
+
+.gray-font {
+  color: rgb(126, 122, 122);
+  font-size: 13px;
+}

@@ -1,0 +1,21 @@
+.customers-title {
+  margin-top: 20px;
+  margin-bottom: 80px;
+  font-family: 'Open Sans Condensed', sans-serif;
+  color: #EF6A4E;
+}
+
+.customers-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.customer-components {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-left: auto;
+  margin-right: auto;
+}
