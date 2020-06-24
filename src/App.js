@@ -19,8 +19,9 @@ const BASE_URL = "http://localhost:3000/";
 
 const App = (props) => {
   const[movies, setMovies] = useState([]);
-  const[movieResults, setMovieResults] = useState([]);
-  const[selectedMovies, setSelectedMovies] = useState([]);
+  const[customers, setCustomers] = useState([]);
+  // const[movieResults, setMovieResults] = useState([]);
+  // const[selectedMovies, setSelectedMovies] = useState([]);
   const[selectedCustomer, setSelectedCustomer] = useState({name: "N/A"});
   const[selectedMovie, setSelectedMovie] = useState({title: "N/A"});
   const[errorMessage, setErrorMessage] = useState(null);
@@ -33,17 +34,38 @@ const App = (props) => {
     returned: false
   });
 
-  // "http://localhost:3000/movies/Psycho";
-
-  useEffect(() => {
-    axios.get(BASE_URL + "movies/")
-    
+  const addCustomers = () => {
+    axios.get(BASE_URL + "customers/")
     .then((response) => {
       const apiData = response.data;
-      // console.log("library:", apiData);
+      const customerObjects = apiData.map((customer, i) => {
+        return {
+        id: customer.id,
+        name: customer.name,
+        accountCredit: customer.account_credit,
+        address: customer.address,
+        city: customer.city,
+        state: customer.state,
+        postalCode: customer.postal_code,
+        moviesCheckedOutCount: customer.movies_checked_out_count,
+        phone: customer.phone,
+        registeredAt: customer.registered_at,
+      }
+    });
+    
+    setCustomers(customerObjects);
+    })
 
+    .catch((error) => {
+      setErrorMessage(error.message);
+    });
+  }
+
+  const addMovies = () => {
+    axios.get(BASE_URL + "movies/")
+    .then((response) => {
+      const apiData = response.data;
       const movieObjects = apiData.map((movie, i) => {
-        // console.log("movie: ", movie);
         return {
           // externalId: movie.external_id,
           id: movie.id,
@@ -54,18 +76,15 @@ const App = (props) => {
         }
       });
       setMovies(movieObjects);
-      })
-
-      .catch((error) => {
-        // console.log("error: ", error.message)
-        setErrorMessage(error.message);
-      });
-    }, [movies]);
-
-  const selectCustomerCallback = (clickedCustomer) => {
-    const newCustomer = clickedCustomer
-    setSelectedCustomer(newCustomer);      
+    })
+    .catch((error) => {
+      setErrorMessage(error.message);
+    });
   }
+
+  // on initial load add the customers and movies
+  useEffect(addCustomers, []);
+  useEffect(addMovies, []);
 
   // Date - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date
   // Add date - https://stackoverflow.com/questions/3818193/how-to-add-number-of-days-to-todays-date
@@ -82,26 +101,24 @@ const App = (props) => {
     newRental.movie = selectedMovie;
     newRental.customer = selectedCustomer;
 
-    // useEffect(() => { 
-      if (selectedMovie.title && selectedCustomer.id) {
-        axios.post(BASE_URL + "rentals/" + selectedMovie.title + "/check-out?customer_id=" + selectedCustomer.id + "&due_date=" + dueDate)
-          .then((response) => {
-            setRentalInfo(newRental);
-            // setCustomers
+    if (selectedMovie.title && selectedCustomer.id) {
+      axios.post(BASE_URL + "rentals/" + selectedMovie.title + "/check-out?customer_id=" + selectedCustomer.id + "&due_date=" + dueDate)
+        .then((response) => {
+          setRentalInfo(newRental);
+          addCustomers();
 
-            setSelectedCustomer({name: "N/A"});
-            setSelectedMovie({title: "N/A"});
-            setFlash(`${selectedMovie.title} has been checked out to ${selectedCustomer.name}!`);
-  
-            console.log("response: ", response.data)
-            console.log('newRental ', newRental);    
-          })
-          .catch((error) => {
-            // setErrorMessage("error: " + error.cause);
-            console.log("failed to save rental: " + error);
-          })    
-        }
-      // }, [customers])
+          setSelectedCustomer({name: "N/A"});
+          setSelectedMovie({title: "N/A"});
+          setFlash(`${selectedMovie.title} has been checked out to ${selectedCustomer.name}!`);
+
+          console.log("response: ", response.data)
+          console.log('newRental ', newRental);    
+        })
+        .catch((error) => {
+          // setErrorMessage("error: " + error.cause);
+          console.log("failed to save rental: " + error);
+        })    
+      }
     }
     
   const onFormSubmit = (event) => {
@@ -110,10 +127,6 @@ const App = (props) => {
     // props.findMoviesCallback(query);
     // props.searchMoviesCallback(query);
     makeRental();
-
-    // setQuery({
-    //   text: ""
-    // });
   };
 
   // Find - reference
@@ -123,12 +136,15 @@ const App = (props) => {
       return movie.id === movieInfo.id
     });
 
-    console.log('currentMovie ', currentMovie);
-
     setSelectedMovie(currentMovie);
     makeRental(currentMovie, selectedCustomer);
     // return selectedMovie;
   };
+
+  const selectCustomerCallback = (clickedCustomer) => {
+    const newCustomer = clickedCustomer
+    setSelectedCustomer(newCustomer);      
+  }
 
   const addMovie = (movieInfo) => {
     console.log(movieInfo);
@@ -148,6 +164,7 @@ const App = (props) => {
           title: response.data.title
         });
 
+        addMovies();
         setMovies(moviesCopy);
         setFlash(`${movieInfo.title} has been added to the rental library!`)
       })
@@ -226,16 +243,13 @@ const App = (props) => {
         </Route>
         <Route exact path="/library">
           <Library 
-            // baseUrl={BASE_URL} 
             movies={movies}
             selectMovieCallback={selectMovie}
-            // selectedMovie={selectedMovie}
           />
         </Route>
         <Route exact path="/customers">
           <Customers 
-            baseUrl={BASE_URL} 
-            // customers={customers}
+            customers={customers}
             selectCustomerCallback={selectCustomerCallback}
           />
         </Route>
