@@ -1,0 +1,39 @@
+.button-bg {
+  border: #EF6A4E solid 2px;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-weight: bold;
+  color: #EF6A4E;
+  letter-spacing: 2px;
+  background-color: #fff;
+}
+
+.button-bg:hover {
+  background-color: #EF6A4E;
+  color: #fff;
+}
+
+
+.movie-container {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 80px;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.movie-info {
+  max-width: 500px;
+  margin-left: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.release-date {
+  color: rgb(126, 122, 122);
+}
+
+.movie-poster {
+  width: 250px;
+}
