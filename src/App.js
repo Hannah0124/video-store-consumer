@@ -153,41 +153,42 @@ const App = (props) => {
         <h2>{errorMessage}</h2>
       </div>}
 
-      <nav>
-        <ul>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/search">Search</Link>
-          </li>
-          <li>
-            <Link to="/library">Library</Link>
-          </li>
-          <li>
-            <Link to="/customers">Customers</Link>
-          </li>
-        </ul>
+      <nav className="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+        <Link to="/" className="navbar-brand">Videoge</Link>
+        <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span className="navbar-toggler-icon"></span>
+        </button>
+
+        <div className="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul className="navbar-nav mr-auto">
+            <li className="nav-item">
+              <Link to="/" className="nav-link" href="#">Home</Link>
+            </li>
+            <li className="nav-item">
+              <Link to="/search" className="nav-link">Search</Link>
+            </li>
+            <li className="nav-item">
+              <Link to="/library" className="nav-link">Library</Link>
+            </li>
+            <li className="nav-item">
+              <Link to="/customers" className="nav-link">Customers</Link>
+            </li>
+          </ul>
+          <div class>
+            <form className="form-inline" onSubmit={onFormSubmit}>
+            {/* <header className="">Search the Database</header> */}
+                <div>
+                <span class="navbar-text">Selected Customer</span>
+                <span>{selectedCustomer.name} <button className="">Remove Customer</button></span></div>
+                <span class="navbar-text">Selected Movie: {selectedMovie.title}</span>
+                <button className="">Remove Movie</button>
+
+              <input type="submit" value="Make Rental" className="" onSubmit={onFormSubmit}/>   
+            </form>
+          </div>
+        </div>
       </nav>
 
-      <div>
-        <form className="" onSubmit={onFormSubmit}>
-        {/* <header className="">Search the Database</header> */}
-        
-          <div>
-            <h2>Selected Customer: {selectedCustomer.name}</h2>
-            <button className="">Remove Customer</button>
-          </div>
-
-          <div>
-            <h2>Selected Movie: {selectedMovie.title}</h2>
-            <button className="">Remove Movie</button>
-          </div>
-
-          <input type="submit" value="Make Rental" className="" onSubmit={onFormSubmit}/>   
-
-        </form>
-      </div>
 
       
 
