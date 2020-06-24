@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import { Route, Switch, Link, BrowserRouter as Router } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import logo from './doge-rentals-logo.png';
-import { Route, Switch, Link, BrowserRouter as Router } from 'react-router-dom';
 // import { Nav, Navbar, Form, FormControl } from 'react-bootstrap';
 
 import './App.css';
@@ -10,16 +10,20 @@ import Home from './components/Home';
 import Search from './components/Search';
 import Library from './components/Library';
 import Customers from './components/Customers';
+import CustomerDetails from './components/CustomerDetails';
 
 const BASE_URL = "http://localhost:3000/";
 
 const App = (props) => {
   const[movies, setMovies] = useState([]);
   const[customers, setCustomers] = useState([]);
+
   // const[movieResults, setMovieResults] = useState([]);
   // const[selectedMovies, setSelectedMovies] = useState([]);
+
   const[selectedCustomer, setSelectedCustomer] = useState({name: "N/A"});
   const[selectedMovie, setSelectedMovie] = useState({title: "N/A"});
+  
   const[errorMessage, setErrorMessage] = useState(null);
   const[flash, setFlash] = useState("");
   const[rentalInfo, setRentalInfo] = useState({
@@ -29,6 +33,7 @@ const App = (props) => {
     dueDate: null,
     returned: false
   });
+  const[rentals, setRentals] = useState([]);
 
   const addCustomers = () => {
     axios.get(BASE_URL + "customers/")
@@ -79,6 +84,7 @@ const App = (props) => {
   useEffect(addCustomers, []);
   useEffect(addMovies, []);
 
+
   // Date - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date
   // Add date - https://stackoverflow.com/questions/3818193/how-to-add-number-of-days-to-todays-date
   const makeRental = () => {  // movieInfo, customerInfo
@@ -93,10 +99,18 @@ const App = (props) => {
     newRental.movie = selectedMovie;
     newRental.customer = selectedCustomer;
 
+
     if (selectedMovie.title && selectedCustomer.id) {
       axios.post(BASE_URL + "rentals/" + selectedMovie.title + "/check-out?customer_id=" + selectedCustomer.id + "&due_date=" + dueDate)
         .then((response) => {
           setRentalInfo(newRental);
+
+          // TODO
+          const rentalsCopy = [...rentals];
+          rentalsCopy.push(newRental);
+          setRentals(rentalsCopy);
+
+
           addCustomers();
 
           setSelectedCustomer({name: "N/A"});
@@ -175,27 +189,30 @@ const App = (props) => {
         <h2>{errorMessage}</h2>
       </div>}
 
-      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a href="/" className="navbar-brand">
+      <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+        <Link href="/" className="navbar-brand">
           <img src={logo} alt="dog" className="navbar__logo" />
           Doge Rentals
-        </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
+        </Link>
+        <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span className="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav">
-            <li class="nav-item active">
+        <div className="collapse navbar-collapse" id="navbarNav">
+          <ul className="navbar-nav">
+            <li className="nav-item active">
               <Link to="/" className="nav-link" href="#">Home</Link>
             </li>
-            <li class="nav-item">
+            <li className="nav-item">
               <Link to="/search" className="nav-link">Search</Link>
             </li>
-            <li class="nav-item">
+            <li className="nav-item">
               <Link to="/library" className="nav-link">Library</Link>
             </li>
-            <li class="nav-item">
+            <li className="nav-item">
               <Link to="/customers" className="nav-link">Customers</Link>
+            </li>
+            <li className="nav-item">
+              <Link to="/customers/details" className="nav-link">Customer Details</Link>
             </li>
           </ul>
         </div>
@@ -236,8 +253,15 @@ const App = (props) => {
         </Route>
         <Route exact path="/customers">
           <Customers 
+            baseUrl={BASE_URL} 
             customers={customers}
             selectCustomerCallback={selectCustomerCallback}
+          />
+        </Route>
+        <Route path={`/customers/details`}>
+          <CustomerDetails 
+            customers={customers}
+            rentals={rentals}
           />
         </Route>
       </Switch>

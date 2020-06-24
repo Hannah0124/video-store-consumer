@@ -7,6 +7,10 @@ import './Customers.css';
 
 const Customers = (props) => {
 
+
+  // const[errorMessage, setErrorMessage] = useState(null); 
+
+  
   const customerComponents = props.customers.map((customer, i) => {
     return (
       <section key={customer.id} className="customer-components">
@@ -34,5 +38,7 @@ const Customers = (props) => {
     </div>
   );
 };
+
+// TODO: Props 
 
 export default Customers;

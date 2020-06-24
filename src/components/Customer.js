@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import './Customer.css';
 
@@ -14,7 +15,9 @@ const Customer = (props) => {
       
 
       <div className="customer-info">
-        <h4 className="customer-name">{props.name}</h4>
+        <h4 className="customer-name"><Link to={`/customers/details`} className="">
+        {props.name}
+        </Link></h4>
         <p className="gray-font">{props.address}</p>
         <p className="gray-font">{props.city}, {props.state} {props.postalCode}</p>
         <p className="gray-font">{props.phone}</p>
