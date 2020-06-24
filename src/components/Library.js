@@ -9,18 +9,16 @@ const Library = (props) => {
 
   const movieComponents = props.movies.map((movie) => {
     return (
-      <section key={movie.id}>
-        <Movie 
-          id={movie.id}
-          imageUrl={movie.imageUrl}
-          overview={movie.overview}
-          releaseDate={movie.releaseDate}
-          title={movie.title}
-          buttonText={"Select movie"}
-          movieCallback={props.selectMovieCallback}
-          // addMovieCallback={props.addMovieCallback}
-        />
-      </section>
+      <Movie 
+        id={movie.id}
+        imageUrl={movie.imageUrl}
+        overview={movie.overview}
+        releaseDate={movie.releaseDate}
+        title={movie.title}
+        buttonText={"Select movie"}
+        movieCallback={props.selectMovieCallback}
+        // addMovieCallback={props.addMovieCallback}
+      />
     );
   });
 
@@ -30,9 +28,9 @@ const Library = (props) => {
 
     // can select a movie from the rental library
     // selection will then be visible across the app - use a state to store this info?
-    <div className="library-container">
+    <div className="library-container container">
       <h1 className="library-title">Library</h1>
-      <div className="movie">{movieComponents}</div>
+      <div className="all-movies justify-content-center">{movieComponents}</div>
     </div>
   );
 };

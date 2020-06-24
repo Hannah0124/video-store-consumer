@@ -1,22 +1,64 @@
-
-.movie-container {
-  display: flex;
-  flex-direction: row;
-  margin-bottom: 80px;
-  font-family: 'Open Sans', sans-serif;
+.movie-poster {
+  width: 100%;
+  max-width: 200px;
+  border: 10px solid #272727;
 }
 
-.movie-info {
-  max-width: 500px;
-  margin-left: 50px;
+/* https://davidwalsh.name/css-flip */
+.movie-card {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
+  flex-direction: row;
+  margin-bottom: 30px;
+  font-family: 'Open Sans', sans-serif;
+  perspective: 1000px;
+}
+
+.movie-card:hover .flipper, .movie-card.hover .flipper, .movie-card.flip .flipper {
+	transform: rotateY(180deg);
+}
+
+/* flip speed goes here */
+.flipper {
+	transition: 0.6s;
+	transform-style: preserve-3d;
+	position: relative;
+}
+
+.movie-front, .movie-back {
+	backface-visibility: hidden;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+/* front pane, placed above back */
+.movie-front {
+	z-index: 2;
+	/* for firefox 31 */
+	transform: rotateY(0deg);
+}
+
+/* back, initially hidden pane */
+.movie-back {
+	transform: rotateY(180deg);
+}
+
+.movie-title {
+  font-family: 'Open Sans Condensed', sans-serif;
 }
 
 .release-date {
   color: rgb(126, 122, 122);
+}
+
+.movie-back {
+  height: 100%;
+  background-color: rgb(231, 231, 231);
+  border-radius: 15px;
+}
+
+.movie-overview {
+  font-size: .9rem;
 }
 
 .active {
@@ -25,8 +67,4 @@
 
 .inactive {
   display: none;
-}
-
-.movie-poster {
-  width: 250px;
 }
