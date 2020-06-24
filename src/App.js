@@ -60,7 +60,7 @@ const App = (props) => {
         // console.log("error: ", error.message)
         setErrorMessage(error.message);
       });
-    }, [movieResults]);
+    }, [movies]);
 
   const selectCustomerCallback = (clickedCustomer) => {
     const newCustomer = clickedCustomer
@@ -149,6 +149,7 @@ const App = (props) => {
         });
 
         setMovies(moviesCopy);
+        setFlash(`${movieInfo.title} has been added to the rental library!`)
       })
       .catch((error) => {
         setErrorMessage("Failed to add movie: " + error.cause);
