@@ -20,6 +20,7 @@ const App = (props) => {
   const[selectedCustomer, setSelectedCustomer] = useState({});
   const[selectedMovie, setSelectedMovie] = useState({});
   const[errorMessage, setErrorMessage] = useState(null);
+  const[flash, setFlash] = useState("");
   const[rentalInfo, setRentalInfo] = useState({
     customer: null,
     movie: null,
@@ -86,6 +87,7 @@ const App = (props) => {
 
             setSelectedCustomer({});
             setSelectedMovie({});
+            setFlash(`${selectedMovie.title} has been checked out to ${selectedCustomer.name}!`);
   
             console.log("response: ", response.data)
             console.log('newRental ', newRental);    
@@ -200,6 +202,8 @@ const App = (props) => {
           <input type="submit" value="Make Rental" className="button-bg" onSubmit={onFormSubmit}/>   
 
         </form>
+
+      {flash && <p className="flash-message">{flash}</p>}
       </div>
 
       
