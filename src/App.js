@@ -88,8 +88,8 @@ const App = (props) => {
             setRentalInfo(newRental);
             // setCustomers
 
-            setSelectedCustomer({});
-            setSelectedMovie({});
+            setSelectedCustomer({name: "N/A"});
+            setSelectedMovie({title: "N/A"});
   
             console.log("response: ", response.data)
             console.log('newRental ', newRental);    
