@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
+import { faTimesCircle } from '@fortawesome/free-regular-svg-icons';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import logo from './doge-rentals-logo.png';
+
 
 import { Route, Switch, Link, BrowserRouter as Router } from 'react-router-dom';
 // import { Nav, Navbar, Form, FormControl } from 'react-bootstrap';
@@ -17,8 +21,8 @@ const App = (props) => {
   const[movies, setMovies] = useState([]);
   const[movieResults, setMovieResults] = useState([]);
   const[selectedMovies, setSelectedMovies] = useState([]);
-  const[selectedCustomer, setSelectedCustomer] = useState({});
-  const[selectedMovie, setSelectedMovie] = useState({});
+  const[selectedCustomer, setSelectedCustomer] = useState({name: "N/A"});
+  const[selectedMovie, setSelectedMovie] = useState({title: "N/A"});
   const[errorMessage, setErrorMessage] = useState(null);
   const[rentalInfo, setRentalInfo] = useState({
     customer: null,
@@ -162,47 +166,54 @@ const App = (props) => {
   return (
     <Router>
       {errorMessage &&
-      <div className="validation-errors-display__list">
+      <div className="alert">
         <h2>{errorMessage}</h2>
       </div>}
 
-      <nav>
-        <ul>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/search">Search</Link>
-          </li>
-          <li>
-            <Link to="/library">Library</Link>
-          </li>
-          <li>
-            <Link to="/customers">Customers</Link>
-          </li>
-        </ul>
-      </nav>
-
-      <div>
-        <form className="" onSubmit={onFormSubmit}>
-        {/* <header className="">Search the Database</header> */}
-        
-          <div>
-            <h5>Selected Movie: {selectedMovie.title}</h5>
-            <button className="button-bg" onClick={removeMovie}>Remove Movie</button>
-          </div>
-
-          <div>
-            <h5>Selected Customer: {selectedCustomer.name}</h5>
-            <button className="button-bg" onClick={removeCustomer}>Remove Customer</button>
-          </div>
-
-          <input type="submit" value="Make Rental" className="button-bg" onSubmit={onFormSubmit}/>   
-
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a href="/" className="navbar-brand">
+          <img src={logo} alt="dog" className="navbar__logo" />
+          Doge Rentals
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item active">
+              <Link to="/" className="nav-link" href="#">Home</Link>
+            </li>
+            <li class="nav-item">
+              <Link to="/search" className="nav-link">Search</Link>
+            </li>
+            <li class="nav-item">
+              <Link to="/library" className="nav-link">Library</Link>
+            </li>
+            <li class="nav-item">
+              <Link to="/customers" className="nav-link">Customers</Link>
+            </li>
+          </ul>
+        </div>
+        <form className="navbar-nav selected__items" onSubmit={onFormSubmit}>
+          <div className="text-center m-2 selected__item">
+            Selected Customer
+            <div className="selected__text">
+              {selectedCustomer.name} 
+              {/* make this field clickable to remove selection */}
+              {/* { selectedCustomer.name === "N/A" ? "" : <button className="btn btn-danger btn-sm"><FontAwesomeIcon icon={faTimesCircle} /></button>} */}
+            </div> 
+          </div> 
+          <div className="text-center m-2 selected__item">
+            Selected Movie 
+            <div className="selected__text">
+              {selectedMovie.title} 
+              {/* make this field clickable to remove selection */}
+              {/* { selectedMovie.title === "N/A" ? "" : <button className="btn btn-danger btn-sm"><FontAwesomeIcon icon={faTimesCircle} /></button>} */}
+            </div> 
+          </div> 
+          <input type="submit" value="Rent" className="align-self-center text-center btn btn-primary btn-sm selected__submit" onSubmit={onFormSubmit}/>   
         </form>
-      </div>
-
-      
+      </nav>
 
       <Switch>
         <Route exact path="/">

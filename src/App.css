@@ -27,6 +27,27 @@
   to { transform: rotate(360deg); }
 }
 
+.navbar__logo {
+  width: 50px;
+  height: 50px;
+  margin-right: 10px;
+}
+
+.selected__item {
+  width: 200px;
+  color: white;
+}
+
+.selected__text {
+  display: block;
+  width: 100%;
+  background-color: rgb(165, 165, 165);
+  border-radius: 5px;
+}
+
+.selected__submit {
+  height: 30px;
+
 /* https://stackoverflow.com/questions/3397113/how-to-remove-focus-border-outline-around-text-input-boxes-chrome */
 input:focus, button:focus, button:click {
   outline: none;
