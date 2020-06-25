@@ -9,8 +9,9 @@ const Library = (props) => {
 
   const movieComponents = props.movies.map((movie) => {
     return (
-      <section key={movie.id}>
+      // <section key={movie.id}>
         <Movie 
+          key={movie.id}
           id={movie.id}
           imageUrl={movie.imageUrl}
           overview={movie.overview}
@@ -20,7 +21,7 @@ const Library = (props) => {
           movieCallback={props.selectMovieCallback}
           // addMovieCallback={props.addMovieCallback}
         />
-      </section>
+      // </section>
     );
   });
 

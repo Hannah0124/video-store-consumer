@@ -19,8 +19,9 @@ const Search = (props) => {
         } else {
           let moviesCopy = response.data.map(movie => {
             return (
-              <section key={movie.external_id}>
+              // <section key={movie.external_id}>
                 <Movie 
+                  key={movie.external_id}
                   id={movie.external_id}
                   imageUrl={movie.image_url}
                   overview={movie.overview}
@@ -29,7 +30,7 @@ const Search = (props) => {
                   buttonText={"Add movie"}
                   movieCallback={props.addMovieCallback}
                 />
-              </section>
+              // </section>
             );
           });
           setMovies(moviesCopy);

@@ -36,7 +36,7 @@ const CustomerDetails = (props) => {
     customerCopy.name = value;
     setCustomer(customerCopy);
 
-    // console.log('customer? ', customer)
+    console.log('customer? ', customer)
   };
 
   const findCustomer = (currentCustomerName) => {
@@ -78,8 +78,9 @@ const CustomerDetails = (props) => {
           const rentalsCopy = currentRentalList.map(rental => {
 
             return (
-              <section key={rental.id}>
+              // <section key={rental.id}>
                 <Rental 
+                  key={rental.id}
                   customerId={rental.customer_id}
                   checkoutDate={rental.checkout_date}
                   dueDate={rental.due_date}
@@ -88,7 +89,7 @@ const CustomerDetails = (props) => {
                   title={rental.title}
                   returnRentalCallback={returnRental}
                 />
-            </section>
+            // </section>
             );
           });
 
@@ -123,6 +124,7 @@ const CustomerDetails = (props) => {
         setErrorMessage("2 error: " + error.cause);
       })
   }
+
   return (
     // after making search, can add a movie from results to rental library (local API)
     <div className="search-container body-container">

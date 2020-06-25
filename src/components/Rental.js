@@ -6,15 +6,17 @@ import './Rental.css';
 
 const Rental = (props) => {
   return (      
-    <tr>
+    <tr key={props.id}>
       <td>{props.name}</td>
       <td>{props.title}</td>
       <td>{props.checkoutDate}</td>
       <td>{props.dueDate}</td>
       <td>{props.returned === true ? 'true' : 'false'}</td>
-      {
-        (props.returned === false) && <button onClick={() => props.returnRentalCallback(props.title, props.customerId)}>Return</button>
-      }
+      <td>
+        {
+          (props.returned === false) && <button onClick={() => props.returnRentalCallback(props.title, props.customerId)}>Return</button>
+        }
+      </td>
     </tr>
   );
 };
