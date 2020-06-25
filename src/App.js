@@ -259,7 +259,7 @@ const App = (props) => {
             </li>
           </ul>
         </div>
-        <form className="navbar-nav selected__items" onSubmit={onFormSubmit}>
+        <form className="navbar-nav selected__container" onSubmit={onFormSubmit}>
           <div className="text-center m-2 selected__item">
             Selected Customer
             <div className="selected__text" onClick={removeCustomer}>
@@ -272,7 +272,11 @@ const App = (props) => {
               <span>{selectedMovie.title} </span>
             </div> 
           </div> 
-          <input type="submit" value="Rent" className="align-self-center text-center btn btn-primary btn-sm selected__submit" onSubmit={onFormSubmit}/>   
+          <div className="text-center m-2">
+            Create Rental
+            <input type="submit" value="Rent" className="btn-primary rent-btn" onSubmit={onFormSubmit}/>   
+          </div> 
+
         </form>
       </nav>
 
