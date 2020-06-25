@@ -42,9 +42,12 @@
   margin-right: 10px;
 }
 
+.selected__container {
+  color: white;
+}
+
 .selected__item {
   width: 200px;
-  color: white;
 }
 
 .selected__text {
@@ -52,6 +55,7 @@
   width: 100%;
   background-color: rgb(165, 165, 165);
   border-radius: 5px;
+  height: 30px;
 }
 
 .selected__text:hover {
@@ -68,8 +72,21 @@
   cursor: pointer;
 }
 
-.selected__submit {
+.rent-btn {
+  width: 100%;
+  border-radius: 5px;
+  display: inline-block;
+  text-align: center;
+  vertical-align: middle;
+  -webkit-user-select: none;
+  user-select: none;
+  background-color: transparent;
+  border: 1px solid transparent;
+  font-size: 1rem;
+  border-radius: .25rem;
+  transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
   height: 30px;
+  margin-top: -2px;
 }
 
 /* https://stackoverflow.com/questions/3397113/how-to-remove-focus-border-outline-around-text-input-boxes-chrome */
