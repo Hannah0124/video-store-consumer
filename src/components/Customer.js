@@ -32,13 +32,19 @@ const Customer = (props) => {
 };
 
 
-// // TODO
-// Customer.propTypes = {
-//   id: PropTypes.number.isRequired,
-//   imageUrl: PropTypes.string,
-//   overview: PropTypes.string,
-//   releaseDate: PropTypes.string,  
-//   title: PropTypes.string.isRequired
-// };
+Customer.propTypes = {
+  id: PropTypes.number.isRequired,
+  name: PropTypes.string.isRequired,
+  accountCredit: PropTypes.number,
+  moviesCheckedOutCount: PropTypes.number,
+  phone: PropTypes.string,
+  address: PropTypes.string,
+  postalCode: PropTypes.string,
+  registeredAt: PropTypes.string,
+  state: PropTypes.string,
+  city: PropTypes.string,
+  selectCustomerCallback: PropTypes.func.isRequired,
+};
+
 
 export default Customer;

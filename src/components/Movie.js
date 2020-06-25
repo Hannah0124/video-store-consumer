@@ -1,13 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import Button from 'react-bootstrap/Button';
 import './Movie.css';
-import { createPopper } from '@popperjs/core';
 
-
-// selectMovieCallback={props.selectMovieCallback}
 const Movie = (props) => {
-  const onSelectMovie = (event) => {
+  const onSelectMovie = () => {
     return props.movieCallback({id: props.id, title: props.title, overview: props.overview, imageURL: props.imageUrl, releaseDate: props.releaseDate});
   };
 
@@ -35,13 +31,14 @@ const Movie = (props) => {
   )
 }
 
-// // TODO
-// Movie.propTypes = {
-//   id: PropTypes.number.isRequired,
-//   imageUrl: PropTypes.string,
-//   overview: PropTypes.string,
-//   releaseDate: PropTypes.string,  
-//   title: PropTypes.string.isRequired
-// };
+Movie.propTypes = {
+  id: PropTypes.number.isRequired,
+  imageUrl: PropTypes.string,
+  overview: PropTypes.string,
+  releaseDate: PropTypes.string,
+  title: PropTypes.string,
+  buttonText: PropTypes.string,
+  movieCallback: PropTypes.func.isRequired
+};
 
 export default Movie;

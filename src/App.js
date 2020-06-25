@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Route, Switch, Link, BrowserRouter as Router } from 'react-router-dom';
-import PropTypes from 'prop-types';
 import axios from 'axios';
 import logo from './doge-rentals-logo.png';
-// import { Nav, Navbar, Form, FormControl } from 'react-bootstrap';
 
 import './App.css';
 import Home from './components/Home';
@@ -14,17 +12,13 @@ import CustomerDetails from './components/CustomerDetails';
 
 const BASE_URL = "http://localhost:3000/";
 
-const App = (props) => {
+const App = () => {
   const[movies, setMovies] = useState([]);
   const[customers, setCustomers] = useState([]);
-
-  // const[movieResults, setMovieResults] = useState([]);
-  // const[selectedMovies, setSelectedMovies] = useState([]);
 
   const[selectedCustomer, setSelectedCustomer] = useState({name: "N/A"});
   const[selectedMovie, setSelectedMovie] = useState({title: "N/A"});
   
-  const[errorMessage, setErrorMessage] = useState("");
   const[flash, setFlash] = useState({text: "", type: ""});
   const[rentalInfo, setRentalInfo] = useState({
     customer: null,
@@ -121,17 +115,16 @@ const App = (props) => {
 
           addCustomers();
 
-          // TODO
-          // setSelectedCustomer({name: "N/A"});
-          // setSelectedMovie({title: "N/A"});
+
+          setSelectedCustomer({name: "N/A"});
+          setSelectedMovie({title: "N/A"});
           setFlash({text: `${selectedMovie.title} has been checked out to ${selectedCustomer.name}!`, type: "success"});
           
           setTimeout(() => {
             setFlash({text: "", type: ""});
           }, 3000);
 
-          console.log("response: ", response.data)
-          console.log('newRental ', newRental);    
+          // console.log('newRental ', newRental);    
         })
         .catch((error) => {
           setFlash({text: `Failed to add rental: ${error.response.data.errors}`, type: "failure"});
@@ -148,15 +141,13 @@ const App = (props) => {
     makeRental();
   };
 
-  // Find - reference
-  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find
+
   const selectMovie = (movieInfo) => {
     const currentMovie = movies.find((movie) => {
       return movie.id === movieInfo.id
     });
 
     setSelectedMovie(currentMovie);
-    // makeRental(currentMovie, selectedCustomer); do we need this here?
   };
 
   const selectCustomerCallback = (clickedCustomer) => {
@@ -209,29 +200,10 @@ const App = (props) => {
   };
 
 
-  // const returnRental = (customerId) => {
-  //   const currentCustomer = customers.find((customer) => {
-  //     customer.id === customerId;
-  //   });
 
-  //   const currentRental = rentals.find((rental) => {
-  //     console.log('rental ', rental);
-  //     rental.customerId === customerId;
-  //   });
-
-  //   const rentalCopy = currentRental;
-  //   rentalCopy.returned = true;
-
-
-  // };
 
   return (
     <Router>
-      {/* {errorMessage &&
-      <div className="alert">
-        <h2>{errorMessage}</h2>
-      </div>} */}
-
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
         <Link href="/" className="navbar-brand">
           <img src={logo} alt="dog" className="navbar__logo" />
@@ -296,7 +268,6 @@ const App = (props) => {
         </Route>
         <Route exact path="/customers">
           <Customers 
-            baseUrl={BASE_URL} 
             customers={customers}
             selectCustomerCallback={selectCustomerCallback}
           />
@@ -304,9 +275,6 @@ const App = (props) => {
         <Route path={`/customerdetails`}>
           <CustomerDetails 
             customers={customers}
-            customer={selectedCustomer}
-            // rentals={rentals}
-            // returnRentalCallback={returnRental}
           />
         </Route>
       </Switch>

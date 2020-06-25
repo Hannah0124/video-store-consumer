@@ -1,6 +1,5 @@
 import React from 'react'
 import PropTypes from 'prop-types';
-import Button from 'react-bootstrap/Button';
 import './Rental.css';
 
 
@@ -30,4 +29,14 @@ const Rental = (props) => {
   );
 };
 
+Rental.propTypes = {
+  customerId: PropTypes.number.isRequired,
+  checkoutDate: PropTypes.string.isRequired,
+  dueDate: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  returned:  PropTypes.bool.isRequired,
+  title:  PropTypes.string.isRequired,
+  returnRentalCallback: PropTypes.func.isRequired,
+};
+                  
 export default Rental;

@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import axios from 'axios';
 import './Library.css';
 
 import Movie from './Movie';
@@ -9,19 +8,16 @@ const Library = (props) => {
 
   const movieComponents = props.movies.map((movie) => {
     return (
-      // <section key={movie.id}>
-        <Movie 
-          key={movie.id}
-          id={movie.id}
-          imageUrl={movie.imageUrl}
-          overview={movie.overview}
-          releaseDate={movie.releaseDate}
-          title={movie.title}
-          buttonText={"Select movie"}
-          movieCallback={props.selectMovieCallback}
-          // addMovieCallback={props.addMovieCallback}
-        />
-      // </section>
+      <Movie 
+        key={movie.id}
+        id={movie.id}
+        imageUrl={movie.imageUrl}
+        overview={movie.overview}
+        releaseDate={movie.releaseDate}
+        title={movie.title}
+        buttonText={"Select movie"}
+        movieCallback={props.selectMovieCallback}
+      />
     );
   });
 
@@ -39,11 +35,11 @@ const Library = (props) => {
 };
 
 
-// TODO
+Library.propTypes = {
+  movies: PropTypes.array.isRequired,
+  selectMovieCallback: PropTypes.func.isRequired,
+};
 
-// Library.propTypes = {
-//   baseUrl: PropTypes.string.isRequired,
-  // movies: PropTypes.array.isRequired
-// };
+            
 
 export default Library;

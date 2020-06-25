@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import './Search.css';
@@ -82,6 +82,14 @@ const Search = (props) => {
         {movies}
       </div>
     </div>
-  )}
+  )};
 
-export default Search
+
+
+Search.propTypes = {
+  movies: PropTypes.array.isRequired,
+  addMovieCallback: PropTypes.func.isRequired
+};
+
+
+export default Search;
