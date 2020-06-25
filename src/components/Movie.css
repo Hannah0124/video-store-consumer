@@ -42,11 +42,29 @@
 .back {
   transform: rotateY(180deg);
   width: 100%;
-  background-color: rgb(226, 226, 226);
+  border: 3px solid black;
   border-radius: 15px;
   justify-content: center;
   align-self: center;
   align-items: center;
+  position:absolute;
+  overflow: hidden;
+}
+
+.back-container {
+  background: rgba(0, 0, 0, 0.5);
+  height:100%;
+  width:100%;
+  display:table;
+  z-index: 100;
+}
+
+.back-inside-container {
+  vertical-align:middle;
+  height:100%;
+  display:table-cell;
+  /* border:1px solid #000; */
+  z-index: 10;
 }
 
 .movie-poster {
@@ -66,7 +84,17 @@
 }
 
 .movie-overview {
-  font-size: .9rem;
+  font-size: 1rem;
   overflow: hidden;
-  max-height: 255px;
+  max-height: 245px;
+  font-weight: bold;
+  color: white;
+}
+
+.image-background {
+  position: absolute;
+  height: 100%;
+  /* object-fit: contain; */
+  top: 0;
+  filter: blur(5px);
 }
