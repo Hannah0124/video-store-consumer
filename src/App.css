@@ -110,3 +110,11 @@ input:focus, button:focus {
   justify-content: center;
   align-items: center;
 }
+
+.all-movies {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-left: auto;
+  margin-right: auto;
+}

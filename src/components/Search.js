@@ -63,7 +63,7 @@ const Search = (props) => {
   
   return (
     // after making search, can add a movie from results to rental library (local API)
-    <div className="search-container body-container">
+    <div className="search-container container">
       <form className="" onSubmit={onSubmit}>
       <header className="search-box-title">Search the Database</header>
         <div className="search-box-container">
@@ -78,7 +78,7 @@ const Search = (props) => {
           <input type="submit" value="Search" className="search-btn" onSubmit={onSubmit}/>
         </div>
       </form>
-      <div className="movie">
+      <div className="all-movies justify-content-center container">
         {movies}
       </div>
     </div>
