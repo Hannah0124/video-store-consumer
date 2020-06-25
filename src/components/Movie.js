@@ -12,18 +12,23 @@ const Movie = (props) => {
   };
 
   return (
-    <div class="movie-container col-3 text-center mb-3 p-3">
-      <div class="flipper">
-        <div class="front">
+    <div className="movie-container col-3 text-center mb-3 p-3">
+      <div className="flipper">
+        <div className="front">
           <div className="">
             <img src={props.imageUrl} alt={props.title} className="movie-poster mb-3" /> 
             <h3 className="movie-title">{props.title}</h3>
             <p className="release-date"><strong>Released</strong>: {props.releaseDate}</p>
           </div>
         </div>
-        <div class="back p-4 d-flex flex-column">
-          <p className="movie-overview">{props.overview}</p>
-          <button className="button-bg" onClick={onSelectMovie}>{props.buttonText}</button>
+        <div className="back d-flex flex-column mx-auto">
+          <img src={props.imageUrl} alt={props.title} className="image-background mx-auto" /> 
+          <div className="back-container p-3">
+            <div className="back-inside-container">
+              <p className="movie-overview">{props.overview}</p>
+              <button className="button-bg" onClick={onSelectMovie}>{props.buttonText}</button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
