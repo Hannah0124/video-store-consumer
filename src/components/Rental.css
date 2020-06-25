@@ -8,6 +8,7 @@ table {
   width: 100%;
   margin: 0 auto;
   position: relative;
+  font-family: 'Open Sans', sans-serif;
 }
 table * {
   position: relative;
@@ -18,9 +19,11 @@ table th {
 }
 table thead tr {
   height: 60px;
-  background: #ffed86;
+  background: #EF6A4E;
+  color: #fff;
   font-size: 16px;
 }
+
 table tbody tr {
   height: 48px;
   border-bottom: 1px solid #e3f1d5;
@@ -92,6 +95,12 @@ table th.r {
     content: "Box Type";
   }
 }
+
+td {
+  font-size: 15px;
+  letter-spacing: 1px;
+}
+
 body {
   background: #9bc86a;
   font: 400 14px "Calibri", "Arial";
@@ -101,4 +110,8 @@ body {
 blockquote {
   color: white;
   text-align: center;
+}
+
+.return-btn {
+  padding: 5px 10px;
 }

@@ -158,10 +158,19 @@ const CustomerDetails = (props) => {
             <thead>
               <tr>
                 <th>Name</th>
+                <th></th>
+                <th></th>
                 <th>Title</th>
+                <th></th>
+                <th></th>
                 <th>Checkout Date</th>
+                <th></th>
+                <th></th>
                 <th>Due Date</th>
+                <th></th>
+                <th></th>
                 <th>Returned</th>
+                <th></th>
                 <th></th>
               </tr>
             </thead>
