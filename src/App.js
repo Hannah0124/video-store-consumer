@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Route, Switch, Link, BrowserRouter as Router } from 'react-router-dom';
-import PropTypes from 'prop-types';
 import axios from 'axios';
 import logo from './doge-rentals-logo.png';
-// import { Nav, Navbar, Form, FormControl } from 'react-bootstrap';
 
 import './App.css';
 import Home from './components/Home';
@@ -122,8 +120,7 @@ const App = (props) => {
             setFlash("");
           }, 3000);
 
-          console.log("response: ", response.data)
-          console.log('newRental ', newRental);    
+          // console.log('newRental ', newRental);    
         })
         .catch((error) => {
           // setErrorMessage("error: " + error.cause);
@@ -214,7 +211,7 @@ const App = (props) => {
     <Router>
       {errorMessage &&
       <div className="alert">
-        <h2>{errorMessage}</h2>
+        <p>{errorMessage}</p>
       </div>}
 
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
@@ -281,7 +278,6 @@ const App = (props) => {
         </Route>
         <Route exact path="/customers">
           <Customers 
-            baseUrl={BASE_URL} 
             customers={customers}
             selectCustomerCallback={selectCustomerCallback}
           />
@@ -289,9 +285,7 @@ const App = (props) => {
         <Route path={`/customerdetails`}>
           <CustomerDetails 
             customers={customers}
-            customer={selectedCustomer}
-            // rentals={rentals}
-            // returnRentalCallback={returnRental}
+            // customer={selectedCustomer}
           />
         </Route>
       </Switch>

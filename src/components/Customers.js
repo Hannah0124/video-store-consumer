@@ -1,25 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import axios from 'axios';
 import Customer from './Customer';
 
 import './Customers.css';
 
 
-
 const Customers = (props) => {
-
-  const[errorMessage, setErrorMessage] = useState(null); 
-
   
   const customerComponents = props.customers.map((customer, i) => {
     return (
       <section key={customer.id} className="customer-components">
-        {errorMessage &&
-        <div className="validation-errors-display__list">
-          <h2>{errorMessage}</h2>
-        </div>}
-
         <Customer 
           id={customer.id}
           name={customer.name}
@@ -44,5 +34,12 @@ const Customers = (props) => {
     </div>
   );
 };
+
+
+Customers.propTypes = {
+  customers: PropTypes.array.isRequired,
+  selectCustomerCallback: PropTypes.func.isRequired
+};
+
 
 export default Customers;

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import axios from 'axios';
@@ -11,37 +11,20 @@ const CustomerDetails = (props) => {
   const BASE_URL = "http://localhost:3000/";
   
   const [rentalList, setRentalList] = useState([]);
-  const [customer, setCustomer] = useState({});
+  const [customer, setCustomer] = useState({name: ''});
   const [errorMessage, setErrorMessage] = useState("");
   const [flash, setFlash] = useState("");
     
-
-  // useEffect(() => {
-  //   getCustomer(customer.id);
-  // }, []);
-
-  // useEffect(() => {
-  //   returnRental();
-  // }, []); 
-
   const onInputChange = event => {
-    const {name, value} = event.target; 
+    const {value} = event.target; 
     const customerCopy = {...customer}
-
-    console.log('name ', name);
-    console.log('value ', value);
-
-    console.log('props.customer', props.customer);
 
     customerCopy.name = value;
     setCustomer(customerCopy);
 
-    console.log('customer? ', customer)
   };
 
   const findCustomer = (currentCustomerName) => {
-    console.log("currentCustomerName ", currentCustomerName);
-    console.log('customers', props.customers)
     const newCustomer = props.customers.find((customer) => {
       return customer.name.toLowerCase() === currentCustomerName.toLowerCase();
     });
@@ -50,7 +33,6 @@ const CustomerDetails = (props) => {
       setErrorMessage('No customer match found');
     } else {
       setCustomer(newCustomer);
-      console.log('id??? ', newCustomer.id)
       getCustomer(newCustomer.id);
     }
   } 
@@ -68,12 +50,12 @@ const CustomerDetails = (props) => {
 
   const getCustomer = (customerId) => {    
     
-    axios.get(BASE_URL + "customers/" + `${customerId}`)
+    axios.get(`${BASE_URL}customers/${customerId}`)
       .then((response) => {
         const currentRentalList = response.data;
-        console.log("currentRentalList!!: ", currentRentalList)
+
         if (currentRentalList.length === 0) {
-          console.log("no rentals found");
+          setErrorMessage("no rentals found");
         } else {
           const rentalsCopy = currentRentalList.map(rental => {
 
@@ -99,18 +81,17 @@ const CustomerDetails = (props) => {
         
       })
       .catch((error) => {
-        setErrorMessage("1 error: " + error.cause);
-        // console.log("failed search: " + error);
+        setErrorMessage("error: " + error.cause);
+        // console.log("failed search: " + error); // TODO
       });    
     };
   
 
+  // http://localhost:3000/rentals/Psycho/return?customer_id=5
+
   const returnRental = (movieTitle, customerId) => {
-    // props.returnRentalCallback()
-// http://localhost:3000/rentals/Psycho/return?customer_id=5
     axios.post(BASE_URL + 'rentals/' + movieTitle + '/return?customer_id=' + customerId)
       .then((response) => {
-        console.log('response.data ', response.data)
         findCustomer(customer.name);
         
         setFlash(`${movieTitle} was succefully returned!`)
@@ -121,7 +102,7 @@ const CustomerDetails = (props) => {
         
       })
       .catch((error) => {
-        setErrorMessage("2 error: " + error.cause);
+        setErrorMessage("error: " + error.cause);
       })
   }
 
@@ -131,7 +112,7 @@ const CustomerDetails = (props) => {
 
       {errorMessage &&
       <div className="alert">
-        <h2>{errorMessage}</h2>
+        <p>{errorMessage}</p>
       </div>}
 
       {flash && <p className="flash-message">{flash}</p>}
@@ -181,6 +162,13 @@ const CustomerDetails = (props) => {
         </div>
       }
     </div>
-  )}
+  )};
+
+
+CustomerDetails.propTypes = {
+  customers: PropTypes.array.isRequired,
+};
+      
+
 
 export default CustomerDetails;

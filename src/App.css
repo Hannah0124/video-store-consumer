@@ -104,6 +104,15 @@ input:focus, button:focus {
   text-align: center;
 }
 
+.alert {
+  padding: 20px;
+  color: #856404;
+  background-color: #fff3cd;
+  border-color: #ffeeba;
+  margin-top: 20px;
+  text-align: center;
+
+}
 .body-container {
   margin: 20px 50px;
   display: flex;
