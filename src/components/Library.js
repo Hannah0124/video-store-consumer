@@ -9,16 +9,19 @@ const Library = (props) => {
 
   const movieComponents = props.movies.map((movie) => {
     return (
-      <Movie 
-        id={movie.id}
-        imageUrl={movie.imageUrl}
-        overview={movie.overview}
-        releaseDate={movie.releaseDate}
-        title={movie.title}
-        buttonText={"Select movie"}
-        movieCallback={props.selectMovieCallback}
-        // addMovieCallback={props.addMovieCallback}
-      />
+      // <section key={movie.id}>
+        <Movie 
+          key={movie.id}
+          id={movie.id}
+          imageUrl={movie.imageUrl}
+          overview={movie.overview}
+          releaseDate={movie.releaseDate}
+          title={movie.title}
+          buttonText={"Select movie"}
+          movieCallback={props.selectMovieCallback}
+          // addMovieCallback={props.addMovieCallback}
+        />
+      // </section>
     );
   });
 

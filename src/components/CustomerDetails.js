@@ -13,7 +13,16 @@ const CustomerDetails = (props) => {
   const [rentalList, setRentalList] = useState([]);
   const [customer, setCustomer] = useState({});
   const [errorMessage, setErrorMessage] = useState("");
+  const [flash, setFlash] = useState("");
     
+
+  // useEffect(() => {
+  //   getCustomer(customer.id);
+  // }, []);
+
+  // useEffect(() => {
+  //   returnRental();
+  // }, []); 
 
   const onInputChange = event => {
     const {name, value} = event.target; 
@@ -22,10 +31,12 @@ const CustomerDetails = (props) => {
     console.log('name ', name);
     console.log('value ', value);
 
+    console.log('props.customer', props.customer);
+
     customerCopy.name = value;
     setCustomer(customerCopy);
 
-    // console.log('customer? ', customer)
+    console.log('customer? ', customer)
   };
 
   const findCustomer = (currentCustomerName) => {
@@ -40,7 +51,7 @@ const CustomerDetails = (props) => {
     } else {
       setCustomer(newCustomer);
       console.log('id??? ', newCustomer.id)
-      onSearch(newCustomer.id);
+      getCustomer(newCustomer.id);
     }
   } 
 
@@ -55,7 +66,7 @@ const CustomerDetails = (props) => {
     // setCustomer({});
   }
 
-  const onSearch = (customerId) => {    
+  const getCustomer = (customerId) => {    
     
     axios.get(BASE_URL + "customers/" + `${customerId}`)
       .then((response) => {
@@ -67,15 +78,18 @@ const CustomerDetails = (props) => {
           const rentalsCopy = currentRentalList.map(rental => {
 
             return (
-              <section key={rental.id}>
+              // <section key={rental.id}>
                 <Rental 
+                  key={rental.id}
+                  customerId={rental.customer_id}
                   checkoutDate={rental.checkout_date}
                   dueDate={rental.due_date}
                   name={rental.name}
                   returned={rental.returned}
                   title={rental.title}
+                  returnRentalCallback={returnRental}
                 />
-            </section>
+            // </section>
             );
           });
 
@@ -85,11 +99,32 @@ const CustomerDetails = (props) => {
         
       })
       .catch((error) => {
-        // setErrorMessage("error: " + error.cause);
-        console.log("failed search: " + error);
+        setErrorMessage("1 error: " + error.cause);
+        // console.log("failed search: " + error);
       });    
     };
   
+
+  const returnRental = (movieTitle, customerId) => {
+    // props.returnRentalCallback()
+// http://localhost:3000/rentals/Psycho/return?customer_id=5
+    axios.post(BASE_URL + 'rentals/' + movieTitle + '/return?customer_id=' + customerId)
+      .then((response) => {
+        console.log('response.data ', response.data)
+        findCustomer(customer.name);
+        
+        setFlash(`${movieTitle} was succefully returned!`)
+
+        setTimeout(() => {
+          setFlash("");
+        }, 3000);
+        
+      })
+      .catch((error) => {
+        setErrorMessage("2 error: " + error.cause);
+      })
+  }
+
   return (
     // after making search, can add a movie from results to rental library (local API)
     <div className="search-container body-container">
@@ -98,6 +133,8 @@ const CustomerDetails = (props) => {
       <div className="alert">
         <h2>{errorMessage}</h2>
       </div>}
+
+      {flash && <p className="flash-message">{flash}</p>}
 
       <form className="" onSubmit={onSubmit}>
         <header className="search-box-title">Search for the customer details</header>
@@ -121,10 +158,20 @@ const CustomerDetails = (props) => {
             <thead>
               <tr>
                 <th>Name</th>
+                <th></th>
+                <th></th>
                 <th>Title</th>
+                <th></th>
+                <th></th>
                 <th>Checkout Date</th>
+                <th></th>
+                <th></th>
                 <th>Due Date</th>
+                <th></th>
+                <th></th>
                 <th>Returned</th>
+                <th></th>
+                <th></th>
               </tr>
             </thead>
             <tbody>
