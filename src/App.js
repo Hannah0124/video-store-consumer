@@ -59,7 +59,7 @@ const App = (props) => {
 
       setTimeout(() => {
         setFlash({text: "", type: ""});
-      }, 5000);
+      }, 3000);
     });
   }
 
@@ -84,7 +84,7 @@ const App = (props) => {
 
       setTimeout(() => {
         setFlash({text: "", type: ""});
-      }, 5000);
+      }, 3000);
     });
   }
 
@@ -138,7 +138,7 @@ const App = (props) => {
 
           setTimeout(() => {
             setFlash({text: "", type: ""});
-          }, 5000);
+          }, 3000);
         })    
       }
     }
@@ -195,7 +195,7 @@ const App = (props) => {
 
         setTimeout(() => {
           setFlash({text: "", type: ""});
-        }, 5000);
+        }, 3000);
       }
     )  
   };
