@@ -65,6 +65,7 @@
 
 .selected__text:hover:before {
   content: "Deselect?";
+  cursor: pointer;
 }
 
 .selected__submit {
