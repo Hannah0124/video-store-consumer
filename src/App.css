@@ -95,11 +95,20 @@ input:focus, button:focus {
   outline: none;
 }
 
-.flash-message {
+.flash-success {
   padding: 20px;
   color: #155724;
   background-color: #d4edda;
   border-color: #c3e6cb;
+  margin-top: 20px;
+  text-align: center;
+}
+
+.flash-failure {
+  padding: 20px;
+  color: #571515;
+  background-color: #edd4d4;
+  border-color: #e6c3c3;
   margin-top: 20px;
   text-align: center;
 }

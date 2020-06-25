@@ -25,7 +25,7 @@ const App = (props) => {
   const[selectedMovie, setSelectedMovie] = useState({title: "N/A"});
   
   const[errorMessage, setErrorMessage] = useState("");
-  const[flash, setFlash] = useState("");
+  const[flash, setFlash] = useState({text: "", type: ""});
   const[rentalInfo, setRentalInfo] = useState({
     customer: null,
     movie: null,
@@ -55,7 +55,11 @@ const App = (props) => {
       setCustomers(customerObjects);
     })
     .catch((error) => {
-      setErrorMessage("Failed to add customer - ", error.message);
+      setFlash({text: `Failed to add customers: ${error.response.data.errors}`, type: "failure"});
+
+      setTimeout(() => {
+        setFlash({text: "", type: ""});
+      }, 3000);
     });
   }
 
@@ -76,7 +80,11 @@ const App = (props) => {
       setMovies(movieObjects);
     })
     .catch((error) => {
-      setErrorMessage(error.message);
+      setFlash({text: `Failed to add movie: ${error.response.data.errors}`, type: "failure"});
+
+      setTimeout(() => {
+        setFlash({text: "", type: ""});
+      }, 3000);
     });
   }
 
@@ -116,18 +124,21 @@ const App = (props) => {
           // TODO
           // setSelectedCustomer({name: "N/A"});
           // setSelectedMovie({title: "N/A"});
-          setFlash(`${selectedMovie.title} has been checked out to ${selectedCustomer.name}!`);
+          setFlash({text: `${selectedMovie.title} has been checked out to ${selectedCustomer.name}!`, type: "success"});
           
           setTimeout(() => {
-            setFlash("");
+            setFlash({text: "", type: ""});
           }, 3000);
 
           console.log("response: ", response.data)
           console.log('newRental ', newRental);    
         })
         .catch((error) => {
-          // setErrorMessage("error: " + error.cause);
-          console.log("failed to save rental: " + error);
+          setFlash({text: `Failed to add rental: ${error.response.data.errors}`, type: "failure"});
+
+          setTimeout(() => {
+            setFlash({text: "", type: ""});
+          }, 3000);
         })    
       }
     }
@@ -173,16 +184,20 @@ const App = (props) => {
         addMovies();
         setMovies(moviesCopy);
 
-        setFlash(`${movieInfo.title} has been added to the rental library!`)
+        setFlash({text: `${movieInfo.title} has been added to the rental library!`, type: "success"})
 
         setTimeout(() => {
-          setFlash("");
+          setFlash({text: "", type: ""});
         }, 3000);
-
       })
-      .catch((error) => {
-        setErrorMessage("Failed to add movie: " + error.cause);
-      })  
+      .catch((error) => {          
+        setFlash({text: `Failed to add movie: ${error.response.data.errors}`, type: "failure"});
+
+        setTimeout(() => {
+          setFlash({text: "", type: ""});
+        }, 3000);
+      }
+    )  
   };
 
   const removeMovie = () => {
@@ -212,10 +227,10 @@ const App = (props) => {
 
   return (
     <Router>
-      {errorMessage &&
+      {/* {errorMessage &&
       <div className="alert">
         <h2>{errorMessage}</h2>
-      </div>}
+      </div>} */}
 
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
         <Link href="/" className="navbar-brand">
@@ -261,7 +276,7 @@ const App = (props) => {
         </form>
       </nav>
 
-      {flash && <p className="flash-message">{flash}</p>}
+      {flash.text && <p className={"flash-" + flash.type}>{flash.text}</p>}
       
       <Switch>
         <Route exact path="/">
