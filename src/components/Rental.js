@@ -12,6 +12,9 @@ const Rental = (props) => {
       <td>{props.checkoutDate}</td>
       <td>{props.dueDate}</td>
       <td>{props.returned === true ? 'true' : 'false'}</td>
+      {
+        (props.returned === false) && <button onClick={() => props.returnRentalCallback(props.title, props.customerId)}>Return</button>
+      }
     </tr>
   );
 };

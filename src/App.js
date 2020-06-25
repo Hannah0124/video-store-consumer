@@ -24,7 +24,7 @@ const App = (props) => {
   const[selectedCustomer, setSelectedCustomer] = useState({name: "N/A"});
   const[selectedMovie, setSelectedMovie] = useState({title: "N/A"});
   
-  const[errorMessage, setErrorMessage] = useState(null);
+  const[errorMessage, setErrorMessage] = useState("");
   const[flash, setFlash] = useState("");
   const[rentalInfo, setRentalInfo] = useState({
     customer: null,
@@ -55,7 +55,7 @@ const App = (props) => {
       setCustomers(customerObjects);
     })
     .catch((error) => {
-      setErrorMessage(error.message);
+      setErrorMessage("Failed to add customer - ", error.message);
     });
   }
 
@@ -113,9 +113,14 @@ const App = (props) => {
 
           addCustomers();
 
-          setSelectedCustomer({name: "N/A"});
-          setSelectedMovie({title: "N/A"});
+          // TODO
+          // setSelectedCustomer({name: "N/A"});
+          // setSelectedMovie({title: "N/A"});
           setFlash(`${selectedMovie.title} has been checked out to ${selectedCustomer.name}!`);
+          
+          setTimeout(() => {
+            setFlash("");
+          }, 3000);
 
           console.log("response: ", response.data)
           console.log('newRental ', newRental);    
@@ -167,7 +172,13 @@ const App = (props) => {
 
         addMovies();
         setMovies(moviesCopy);
+
         setFlash(`${movieInfo.title} has been added to the rental library!`)
+
+        setTimeout(() => {
+          setFlash("");
+        }, 3000);
+
       })
       .catch((error) => {
         setErrorMessage("Failed to add movie: " + error.cause);
@@ -181,6 +192,23 @@ const App = (props) => {
   const removeCustomer = () => {
     setSelectedCustomer({name: "N/A"});
   };
+
+
+  // const returnRental = (customerId) => {
+  //   const currentCustomer = customers.find((customer) => {
+  //     customer.id === customerId;
+  //   });
+
+  //   const currentRental = rentals.find((rental) => {
+  //     console.log('rental ', rental);
+  //     rental.customerId === customerId;
+  //   });
+
+  //   const rentalCopy = currentRental;
+  //   rentalCopy.returned = true;
+
+
+  // };
 
   return (
     <Router>
@@ -212,7 +240,7 @@ const App = (props) => {
               <Link to="/customers" className="nav-link">Customers</Link>
             </li>
             <li className="nav-item">
-              <Link to="/customers/details" className="nav-link">Customer Details</Link>
+              <Link to="/customerdetails" className="nav-link">Customer Details</Link>
             </li>
           </ul>
         </div>
@@ -258,10 +286,12 @@ const App = (props) => {
             selectCustomerCallback={selectCustomerCallback}
           />
         </Route>
-        <Route path={`/customers/details`}>
+        <Route path={`/customerdetails`}>
           <CustomerDetails 
             customers={customers}
-            rentals={rentals}
+            customer={selectedCustomer}
+            // rentals={rentals}
+            // returnRentalCallback={returnRental}
           />
         </Route>
       </Switch>

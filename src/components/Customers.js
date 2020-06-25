@@ -5,15 +5,21 @@ import Customer from './Customer';
 
 import './Customers.css';
 
+
+
 const Customers = (props) => {
 
-
-  // const[errorMessage, setErrorMessage] = useState(null); 
+  const[errorMessage, setErrorMessage] = useState(null); 
 
   
   const customerComponents = props.customers.map((customer, i) => {
     return (
       <section key={customer.id} className="customer-components">
+        {errorMessage &&
+        <div className="validation-errors-display__list">
+          <h2>{errorMessage}</h2>
+        </div>}
+
         <Customer 
           id={customer.id}
           name={customer.name}
@@ -38,7 +44,5 @@ const Customers = (props) => {
     </div>
   );
 };
-
-// TODO: Props 
 
 export default Customers;
