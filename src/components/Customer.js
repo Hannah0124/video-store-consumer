@@ -15,7 +15,7 @@ const Customer = (props) => {
       
 
       <div className="customer-info">
-        <h4 className="customer-name"><Link to={`/customerdetails`} className="">
+        <h4 className="customer-name"><Link to={`/customerdetails`} className="customer-name">
         {props.name}
         </Link></h4>
         <p className="gray-font">{props.address}</p>

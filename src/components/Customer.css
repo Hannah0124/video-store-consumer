@@ -12,6 +12,11 @@
   margin-top: 20px;
   margin-bottom: 20px;
   text-align: center;
+  color: black;
+}
+
+.customer-name:hover {
+  color: #EF6A4E;
 }
 
 .customer-info {
