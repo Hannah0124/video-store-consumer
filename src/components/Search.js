@@ -6,7 +6,7 @@ import './Search.css';
 import Movie from './Movie';
 
 const Search = (props) => {
-  const BASE_URL = "http://localhost:3000/";
+  const BASE_URL = "https://doge-rental.herokuapp.com/";
   
   const [query, setQuery] = useState({text: ""});
   const [movies, setMovies] = useState([]);

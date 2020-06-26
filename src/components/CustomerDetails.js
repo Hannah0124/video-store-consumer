@@ -8,7 +8,7 @@ import './CustomerDetails.css';
 
 
 const CustomerDetails = (props) => {
-  const BASE_URL = "http://localhost:3000/";
+  const BASE_URL = "https://doge-rental.herokuapp.com/";
   
   const [rentalList, setRentalList] = useState([]);
   const [customer, setCustomer] = useState({name: ''});

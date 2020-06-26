@@ -10,7 +10,7 @@ import Library from './components/Library';
 import Customers from './components/Customers';
 import CustomerDetails from './components/CustomerDetails';
 
-const BASE_URL = "http://localhost:3000/";
+const BASE_URL = "https://doge-rental.herokuapp.com/";
 
 const App = () => {
   const[movies, setMovies] = useState([]);
