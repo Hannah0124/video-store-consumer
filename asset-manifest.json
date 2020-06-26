@@ -1,9 +1,26 @@
 {
-  "main.css": "static/css/main.08c7c515.css",
-  "main.css.map": "static/css/main.08c7c515.css.map",
-  "main.js": "static/js/main.449326b3.js",
-  "main.js.map": "static/js/main.449326b3.js.map",
-  "static/media/film-reel.svg": "static/media/film-reel.6794d2f3.svg",
-  "static/media/magnifying-glass-search.svg": "static/media/magnifying-glass-search.6c42d201.svg",
-  "static/media/people.svg": "static/media/people.2aa64ca8.svg"
+  "files": {
+    "main.css": "/video-store-consumer/static/css/main.1fd36ef2.chunk.css",
+    "main.js": "/video-store-consumer/static/js/main.cc32453f.chunk.js",
+    "main.js.map": "/video-store-consumer/static/js/main.cc32453f.chunk.js.map",
+    "runtime-main.js": "/video-store-consumer/static/js/runtime-main.888f3c54.js",
+    "runtime-main.js.map": "/video-store-consumer/static/js/runtime-main.888f3c54.js.map",
+    "static/css/2.af3c1da9.chunk.css": "/video-store-consumer/static/css/2.af3c1da9.chunk.css",
+    "static/js/2.b1e08b0e.chunk.js": "/video-store-consumer/static/js/2.b1e08b0e.chunk.js",
+    "static/js/2.b1e08b0e.chunk.js.map": "/video-store-consumer/static/js/2.b1e08b0e.chunk.js.map",
+    "index.html": "/video-store-consumer/index.html",
+    "precache-manifest.a9221ad5a7dac11ab760720d398d8011.js": "/video-store-consumer/precache-manifest.a9221ad5a7dac11ab760720d398d8011.js",
+    "service-worker.js": "/video-store-consumer/service-worker.js",
+    "static/css/2.af3c1da9.chunk.css.map": "/video-store-consumer/static/css/2.af3c1da9.chunk.css.map",
+    "static/css/main.1fd36ef2.chunk.css.map": "/video-store-consumer/static/css/main.1fd36ef2.chunk.css.map",
+    "static/js/2.b1e08b0e.chunk.js.LICENSE.txt": "/video-store-consumer/static/js/2.b1e08b0e.chunk.js.LICENSE.txt",
+    "static/media/doge-rentals-logo.png": "/video-store-consumer/static/media/doge-rentals-logo.32fa3255.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.888f3c54.js",
+    "static/css/2.af3c1da9.chunk.css",
+    "static/js/2.b1e08b0e.chunk.js",
+    "static/css/main.1fd36ef2.chunk.css",
+    "static/js/main.cc32453f.chunk.js"
+  ]
 }
