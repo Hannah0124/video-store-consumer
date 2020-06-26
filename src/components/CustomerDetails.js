@@ -118,7 +118,7 @@ const CustomerDetails = (props) => {
       {flash && <p className="flash-message">{flash}</p>}
 
       <form className="" onSubmit={onSubmit}>
-        <header className="search-box-title">Search for the customer details</header>
+        <header className="search-box-title">Search for customer details</header>
         <div className="search-box-container">
           <input
             className="search-box"

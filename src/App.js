@@ -212,6 +212,7 @@ const App = () => {
         <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>
         </button>
+        
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav">
             <li className="nav-item active">
@@ -227,7 +228,7 @@ const App = () => {
               <Link to="/customers" className="nav-link">Customers</Link>
             </li>
             <li className="nav-item">
-              <Link to="/customerdetails" className="nav-link">Customer Details</Link>
+              <Link to="/customerdetails" className="nav-link">Customer Rental History</Link>
             </li>
           </ul>
         </div>
@@ -246,7 +247,7 @@ const App = () => {
           </div> 
           <div className="text-center m-2">
             Create Rental
-            <input type="submit" value="Rent" className="btn-primary rent-btn" onSubmit={onFormSubmit}/>   
+            <input type="submit" value="Rent" className="rent-btn" onSubmit={onFormSubmit}/>   
           </div> 
 
         </form>
